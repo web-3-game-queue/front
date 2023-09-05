@@ -1,0 +1,25 @@
+{
+  "maps": [
+    {
+      "name": "de_dust2",
+      "width": 200,
+      "height": 150,
+      "maxPlayersCount": 30,
+      "coverImageUrl": "https://upload.wikimedia.org/wikipedia/ru/6/6f/Dust_II_%28CS-GO%29.jpg"
+    },
+    {
+      "name": "Defence of the ancients",
+      "width": 128,
+      "height": 128,
+      "maxPlayersCount": 10,
+      "coverImageUrl": "https://static.wikia.nocookie.net/dota2_gamepedia/images/8/8d/Labelled_Map_7.20.png"
+    },
+    {
+      "name": "Seton's Clutch'",
+      "width": 20,
+      "height": 20,
+      "maxPlayersCount": 8,
+      "coverImageUrl": "https://static.wikia.nocookie.net/supcom/images/9/91/Seton%27s_Clutch_preview.png"
+    }
+  ]
+}

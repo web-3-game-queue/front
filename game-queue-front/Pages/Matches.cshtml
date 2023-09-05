@@ -1,0 +1,22 @@
+﻿@page
+@using game_queue_front.Service;
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+@{
+
+    var mapsPath = "./static/maps.json";
+    var playersPath = "./static/players.json";
+    var matchNamesPath = "./static/match_names.json";
+
+    var matches = StaticDataProvider.LoadMatches(
+        env.WebRootFileProvider.GetFileInfo(mapsPath).PhysicalPath,
+        env.WebRootFileProvider.GetFileInfo(playersPath).PhysicalPath,
+        env.WebRootFileProvider.GetFileInfo(matchNamesPath).PhysicalPath
+    );
+}
+
+<div>
+    <h5>Matches:</h5>
+    @foreach (var match in matches) {
+        <div>@match.ToString()</div>
+    }
+</div>
