@@ -29,8 +29,7 @@ namespace game_queue_front.Service {
             }
 
             var random = new Random();
-            var playersMatchId = Enumerable
-                .Range(0, players.Count - 1)
+            var playersMatchId = players
                 .Select(_ => random.Next(0, rawMatches.Count))
                 .ToList();
 
@@ -38,12 +37,11 @@ namespace game_queue_front.Service {
                 .Select((rawMatch, index) => {
                     var map = maps[rawMatch.MapId];
                     var match = new Match(rawMatch.Id, rawMatch.Name, map);
-                    var playerIds = playersMatchId.Where(matchId => matchId == index);
-                    foreach (var playerId in playerIds) {
-                        var player = players[playerId];
-                        players.RemoveAt(playerId);
-                        match.Players.Add(player);
-                    }
+                    match.Players = playersMatchId
+                        .Select((matchId, playerId) => (matchId, playerId))
+                        .Where(tuple => tuple.matchId == index)
+                        .Select(tuple => players[tuple.playerId])
+                        .ToList();
                     match.Id = index;
                     return match;
                 })
