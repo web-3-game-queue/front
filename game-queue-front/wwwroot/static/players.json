@@ -1,14 +1,17 @@
 {
   "players": [
     {
+      "id": 0,
       "name": "Nagibator2006",
       "level": 2
     },
     {
+      "id": 1,
       "name": "Porto",
       "level": 444
     },
     {
+      "id": 2,
       "name": "TwitchSniper",
       "level": 12
     }

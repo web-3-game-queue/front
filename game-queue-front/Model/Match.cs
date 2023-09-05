@@ -1,5 +1,6 @@
 ﻿namespace game_queue_front.Model {
     public class Match {
+        public int Id;
         public string Name { get; set; }
         public Map Map { get; set; }
 
@@ -12,9 +13,11 @@
         public List<Player> Players = new List<Player>();
 
         public Match(
+            int id,
             string name,
             Map map
         ) {
+            Id = id;
             Name = name;
             Map = map;
         }
