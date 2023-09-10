@@ -1,4 +1,4 @@
-﻿namespace game_queue_front.Model {
+﻿namespace game_queue_front.Business {
     public class Player {
         public int Id { get; set; }
         public string Name { get; set; }

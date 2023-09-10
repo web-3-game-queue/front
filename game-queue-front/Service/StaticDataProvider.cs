@@ -1,4 +1,4 @@
-﻿using game_queue_front.Model;
+﻿using game_queue_front.Business;
 using Newtonsoft.Json;
 
 namespace game_queue_front.Service {

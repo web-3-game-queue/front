@@ -1,4 +1,4 @@
-﻿namespace game_queue_front.Model {
+﻿namespace game_queue_front.Business {
     public class Match {
         public int Id;
         public string Name { get; set; }
