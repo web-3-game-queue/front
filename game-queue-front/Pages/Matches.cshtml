@@ -1,6 +1,8 @@
 ﻿@page
 @using game_queue_front.Service;
+@using game_queue_front.Pages;
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+@model MatchesModel
 @{
 
     var mapsPath = "./static/maps.json";
@@ -14,10 +16,19 @@
             env.WebRootFileProvider.GetFileInfo(matchesPath).PhysicalPath
         );
     }
+
+    Console.WriteLine("Init done");
 }
 
 <div class="container text-center">
     <h5>Matches:</h5>
+    <form method="post" >
+        <label for="MapName">Map name:</label>
+        <input type="text" id="FilterMapName" name="FilterMapName" />
+        <label for="MapPrice">Map price:</label>
+        <input type="text" id="FilterMapPrice" name="FilterMapPrice" />
+        <input type="submit" value="Filter" class="submit" />
+    </form>
     <div class="row">
         @foreach (var match in StaticDataProvider.Instance.Matches) {
             <div class="col mb-3 mb-sm-0">
