@@ -1,6 +1,11 @@
 using game_queue_front.Service;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// builder.Services.AddDbContext<DbContext>(options =>
+// 	options.UsePos
+// );
 
 // Add services to the container.
 builder.Services.AddRazorPages();
