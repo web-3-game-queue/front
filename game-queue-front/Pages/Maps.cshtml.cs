@@ -1,45 +1,36 @@
-using game_queue_front.Business;
-using game_queue_front.Service;
+using game_queue_front.Business.Maps;
+using game_queue_front.Database;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace game_queue_front.Pages {
-    public class MatchesModel: PageModel {
+    public class MapsModel: PageModel {
         public string? FilterMapName { get; set; }
         public decimal? FilterMapPrice { get; set; }
 
         public List<Map> Maps { get; set; } = new List<Map>();
 
-        private IWebHostEnvironment env { get; set; }
-
         private readonly MapService mapService;
+        private readonly GameQueueContext context;
 
-        public MatchesModel(
-            IWebHostEnvironment env,
-            MapService mapService
+        public MapsModel(
+            MapService mapService,
+            GameQueueContext context
         ) {
-            this.env = env;
             this.mapService = mapService;
+            this.context = context;
         }
 
-        public void OnGet() {
-            var mapsPath = "./static/maps.json";
-
-            if (StaticDataProvider.Instance == null) {
-                StaticDataProvider.InstantiateMatches(
-                    env.WebRootFileProvider.GetFileInfo(mapsPath).PhysicalPath
-                );
-            }
-
-            Maps = new List<Map>(StaticDataProvider.Instance.Maps);
+        public async void OnGet() {
+            Maps = await context.Maps.ToListAsync();
         }
 
-        public void OnPost(string filterMapName, decimal? filterMapPrice) {
+        public async void OnPost(string? filterMapName, decimal? filterMapPrice) {
             FilterMapName = filterMapName;
             FilterMapPrice = filterMapPrice;
 
-            Maps = mapService
-                .FilterMapsByNameAndMaxPrice(StaticDataProvider.Instance.Maps, filterMapName, filterMapPrice)
-                .ToList();
+            Maps = await mapService
+                .GetMapsFilteredByNameAndMaxPrice(filterMapName ?? "", filterMapPrice ?? decimal.MaxValue);
         }
     }
 }

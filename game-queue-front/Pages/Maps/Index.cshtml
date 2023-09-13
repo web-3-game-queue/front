@@ -1,18 +1,19 @@
 ﻿@page "{id}"
-@using game_queue_front.Service;
-@{
-    var mapId = Convert.ToInt32(RouteData.Values["id"]);
-    var map = StaticDataProvider.Instance.Maps[mapId];
-}
+@using game_queue_front.Pages.Maps
+@model MapModel
 
 <div class="card">
-    <img class="card-img-top p-3" src="@map.CoverImageUrl" alt="Minimap image" style="width: 40rem">
-    <div class="card-body">
-        <h3 class="card-title">@map.Name</h3>
+    @if (Model.Map == null) {
+        <h2>Map with id #@Model.MapId not found</h2>
+    } else {
+        <img class="card-img-top p-3" src="@Model.Map.CoverImageUrl" alt="Minimap image" style="width: 40rem">
         <div class="card-body">
-            @map.ToString()
-            <br />
-            Entry fee: <strong>@map.EntryPrice$</strong>
+            <h3 class="card-title">@Model.Map.Name</h3>
+            <div class="card-body">
+                @Model.Map.ToString()
+                <br />
+                Entry fee: <strong>@Model.Map.EntryPrice$</strong>
+            </div>
         </div>
-    </div>
+    }
 </div>

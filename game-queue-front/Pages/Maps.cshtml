@@ -1,5 +1,5 @@
 ﻿@page
-@model MatchesModel
+@model MapsModel
 
 <div class="container" style="display: flex">
     <div>
@@ -13,13 +13,13 @@
             </div>
             <div class="mb-3">
                 <label for="FilterMapPrice" class="form-label">Max enter fee</label>
-                <input type="number" class="form-control" id="FilterMapPrice" name="FilterMapPrice" value="@Model.FilterMapPrice">
+                <input type="number" class="form-control" id="FilterMapPrice" name="FilterMapPrice" value="@Model.FilterMapPrice" min="0">
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
     </div>
     <div class="row text-center" style="width: 100%">
-        <h5 class="p-0">Matches:</h5>
+        <h5 class="p-0">Maps:</h5>
         @foreach (var map in Model.Maps) {
             <div class="col mb-3 mb-sm-0 p-0 p-xl-3">
                 <div class="card" style="width: auto;">

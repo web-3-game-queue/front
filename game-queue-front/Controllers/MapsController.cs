@@ -1,5 +1,5 @@
 ﻿using game_queue_front.Business;
-using game_queue_front.Service;
+using game_queue_front.Business.Maps;
 using Microsoft.AspNetCore.Mvc;
 
 namespace game_queue_front.Controllers {
@@ -15,11 +15,8 @@ namespace game_queue_front.Controllers {
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Map>> Get(string? filterName = null, decimal? filterPrice = null) {
-            var filtered = mapService
-                .FilterMapsByNameAndMaxPrice(StaticDataProvider.Instance.Maps, filterName, filterPrice)
-                .ToList();
-            return filtered;
-        }
+        public async Task<ActionResult<IEnumerable<Map>>> Get(string filterName = "", decimal maxPrice = decimal.MaxValue)
+            => await mapService
+                .GetMapsFilteredByNameAndMaxPrice(filterName, maxPrice);
     }
 }
