@@ -17,7 +17,7 @@
         }
 
         public override string ToString() {
-            return string.Format("{0}: \"{1}\" ({2}/{3}) {4}$", Name, Map.Name, Players.Count, Map.MaxPlayersCount, Map.EntryPrice);
+            return string.Format("{0}: \"{1}\" ({2}/{3})", Name, Map.Name, Players.Count, Map.MaxPlayersCount);
         }
     }
 }

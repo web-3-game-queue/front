@@ -3,8 +3,10 @@
 
 <div class="container" style="display: flex">
     <div>
-        <h5>Filters</h5>
         <form method="post" class="card p-2 m-3" style="width: 250px">
+            <div style="display: flex">
+                <h5>Filters</h5>
+            </div>
             <div class="mb-3">
                 <label for="FilterMapName" class="form-label">Map name</label>
                 <input type="text" class="form-control" id="FilterMapName" name="FilterMapName" value="@Model.FilterMapName">
@@ -18,13 +20,14 @@
     </div>
     <div class="row text-center" style="width: 100%">
         <h5 class="p-0">Matches:</h5>
-        @foreach (var match in this.Model.Matches) {
+        @foreach (var map in Model.Maps) {
             <div class="col mb-3 mb-sm-0 p-0 p-xl-3">
                 <div class="card" style="width: auto;">
-                    <img class="card-img-top" src="@match.Map.CoverImageUrl" alt="Minimap image">
+                    <img class="card-img-top" src="@map.CoverImageUrl" alt="Minimap image">
                     <div class="card-body">
-                        <h5 class="card-title">@match.ToString()</h5>
-                        <a href="Matches/@match.Id/" class="btn btn-primary">More details</a>
+                        <h5 class="card-title">@map.ToString()</h5>
+                        <h6>Entry fee: <strong>@map.EntryPrice$</strong></h6>
+                        <a href="Maps/@map.Id/" class="btn btn-primary">More details</a>
                     </div>
                 </div>
             </div>

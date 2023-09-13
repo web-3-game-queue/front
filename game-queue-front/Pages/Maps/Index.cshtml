@@ -1,0 +1,18 @@
+﻿@page "{id}"
+@using game_queue_front.Service;
+@{
+    var mapId = Convert.ToInt32(RouteData.Values["id"]);
+    var map = StaticDataProvider.Instance.Maps[mapId];
+}
+
+<div class="card">
+    <img class="card-img-top p-3" src="@map.CoverImageUrl" alt="Minimap image" style="width: 40rem">
+    <div class="card-body">
+        <h3 class="card-title">@map.Name</h3>
+        <div class="card-body">
+            @map.ToString()
+            <br />
+            Entry fee: <strong>@map.EntryPrice$</strong>
+        </div>
+    </div>
+</div>

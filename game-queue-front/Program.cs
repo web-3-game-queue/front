@@ -1,6 +1,4 @@
 using game_queue_front.Business;
-using game_queue_front.Service;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<MatchService>();
+builder.Services.AddScoped<MapService>();
 
 var app = builder.Build();
 
