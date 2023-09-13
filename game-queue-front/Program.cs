@@ -2,10 +2,16 @@ using game_queue_front.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// builder.Services.AddDbContext<DbContext>(options =>
+// 	options.UsePos
+// );
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<MapService>();
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -22,6 +28,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllers();
 
 app.MapRazorPages();
 
