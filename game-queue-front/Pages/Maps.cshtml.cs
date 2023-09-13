@@ -11,7 +11,7 @@ namespace game_queue_front.Pages {
 
         private IWebHostEnvironment env { get; set; }
 
-        private MapService mapService { get; set; }
+        private readonly MapService mapService;
 
         public MatchesModel(
             IWebHostEnvironment env,
