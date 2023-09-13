@@ -7,10 +7,10 @@
         public int MaxPlayersCount { get; set; }
         public string CoverImageUrl { get; set; }
 
-        private decimal entryFee;
-        public decimal EntryFee {
-            get => entryFee;
-            set => entryFee = validateEntryFee(value);
+        private decimal entryPrice;
+        public decimal EntryPrice {
+            get => entryPrice;
+            set => entryPrice = validateEntryFee(value);
         }
 
         public Map(

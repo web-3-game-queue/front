@@ -7,7 +7,7 @@
       "height": 150,
       "maxPlayersCount": 30,
       "coverImageUrl": "/static/de_dust2.jpg",
-      "entryFee": 400
+      "entryPrice": 400
     },
     {
       "id": 1,
@@ -16,7 +16,7 @@
       "height": 128,
       "maxPlayersCount": 10,
       "coverImageUrl": "/static/DOTA.jpg",
-      "entryFee": 1500
+      "entryPrice": 1500
     },
     {
       "id": 2,
@@ -25,7 +25,7 @@
       "height": 20,
       "maxPlayersCount": 8,
       "coverImageUrl": "/static/Seton.jpg",
-      "entryFee": 7800
+      "entryPrice": 7800
     }
   ]
 }
