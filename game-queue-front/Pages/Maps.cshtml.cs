@@ -3,7 +3,7 @@ using game_queue_front.Service;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace game_queue_front.Pages {
-    public class MatchesModel: PageModel {
+    public class MapsModel: PageModel {
         public string? FilterMapName { get; set; }
         public decimal? FilterMapPrice { get; set; }
 
@@ -13,7 +13,7 @@ namespace game_queue_front.Pages {
 
         private readonly MapService mapService;
 
-        public MatchesModel(
+        public MapsModel(
             IWebHostEnvironment env,
             MapService mapService
         ) {
