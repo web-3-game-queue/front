@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace game_queue_front.Pages {
-    public class MatchesModel : PageModel {
+    public class MatchesModel: PageModel {
         public string? FilterMapName { get; set; }
         public decimal? FilterMapPrice { get; set; }
         public List<Match> Matches { get; set; } = new List<Match>();
