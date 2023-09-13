@@ -1,9 +1,11 @@
-using game_queue_front.Service;
+using game_queue_front.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<MapService>();
 
 var app = builder.Build();
 
