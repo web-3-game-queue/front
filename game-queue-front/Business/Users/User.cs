@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using game_queue_front.Business.MapSearchRequests;
 using game_queue_front.Business.Matches;
 
 namespace game_queue_front.Business.Users {
-    [Table("users")]
     public class User {
         [Key]
         public int Id { get; set; }
@@ -18,5 +18,7 @@ namespace game_queue_front.Business.Users {
 
         public int? MatchId { get; set; }
         public Match? EnteredMatch { get; set; }
+
+        public List<MapSearchRequest> SearchRequests { get; } = new List<MapSearchRequest>();
     }
 }

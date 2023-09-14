@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using game_queue_front.Business.MapSearchRequests;
 
 namespace game_queue_front.Business.Maps {
-    [Table("maps")]
     public class Map {
         [Key]
         public int Id { get; set; }
@@ -24,7 +23,7 @@ namespace game_queue_front.Business.Maps {
         [Range(0, double.MaxValue)]
         public decimal EntryPrice { get; set; }
 
-        public Map() { }
+        public List<MapSearchRequest> Requests = new List<MapSearchRequest>();
 
         public override string ToString() {
             return string.Format("{0} {1}x{2} ({3}p)", Name, Width, Height, MaxPlayersCount);
