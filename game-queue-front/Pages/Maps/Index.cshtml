@@ -9,11 +9,16 @@
         <img class="card-img-top p-3" src="@Model.Map.CoverImageUrl" alt="Minimap image" style="width: 40rem">
         <div class="card-body">
             <h3 class="card-title">@Model.Map.Name</h3>
-            <div class="card-body">
-                @Model.Map.ToString()
-                <br />
-                Entry fee: <strong>@Model.Map.EntryPrice$</strong>
-            </div>
+            @Model.Map.ToString()
+            <br />
+            Entry fee: <strong>@Model.Map.EntryPrice$</strong>
+            @if (Model.Map.Status == Business.Maps.MapStatus.Deleted) {
+                <h5>Not available.</h5>
+            } else {
+                <form method="post">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            }
         </div>
     }
 </div>

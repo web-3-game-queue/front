@@ -9,8 +9,13 @@ namespace game_queue_front.Database {
         public DbSet<Match> Matches { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
 
-        public GameQueueContext(DbContextOptions<GameQueueContext> options) : base(options) { 
+        public GameQueueContext(DbContextOptions<GameQueueContext> options) : base(options) {
+            Database.Migrate();
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Map>().Property(m => m.Status).HasDefaultValue(MapStatus.Available);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>

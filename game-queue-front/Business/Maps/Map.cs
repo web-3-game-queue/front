@@ -23,6 +23,8 @@ namespace game_queue_front.Business.Maps {
         [Range(0, double.MaxValue)]
         public decimal EntryPrice { get; set; }
 
+        public MapStatus Status { get; set; }
+
         public List<MapSearchRequest> Requests = new List<MapSearchRequest>();
 
         public override string ToString() {

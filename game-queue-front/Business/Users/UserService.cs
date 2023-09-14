@@ -12,5 +12,23 @@ namespace game_queue_front.Business.Users {
             this.context = context;
             this.passwordHasher = passwordHasher;
         }
+
+        public async Task<User> CreateUser(
+            string name,
+            string password,
+            int level,
+            int? enteredMatchId
+        ) {
+            var hashedPassword = passwordHasher.HashPassword(password, name);
+            var user = new User {
+                Name = name,
+                HashedPassword = hashedPassword,
+                Level = level,
+                MatchId = enteredMatchId
+            };
+            await context.Users.AddAsync(user);
+            context.SaveChanges();
+            return user;
+        }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using game_queue_front.Business.MapSearchRequests;
 using game_queue_front.Business.Matches;
+using Microsoft.EntityFrameworkCore;
 
 namespace game_queue_front.Business.Users {
+    [Index(nameof(Name), IsUnique = true)]
     public class User {
         [Key]
         public int Id { get; set; }
@@ -17,7 +18,7 @@ namespace game_queue_front.Business.Users {
         public int Level { get; set; }
 
         public int? MatchId { get; set; }
-        public Match? EnteredMatch { get; set; }
+        public Match? Match { get; set; }
 
         public List<MapSearchRequest> SearchRequests { get; } = new List<MapSearchRequest>();
     }

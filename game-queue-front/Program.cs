@@ -10,6 +10,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<MapService>();
 builder.Services.AddScoped<PasswordHasherService>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddDbContext<GameQueueContext>(
     opt => {
