@@ -12,7 +12,10 @@ builder.Services.AddScoped<MapService>();
 builder.Services.AddScoped<PasswordHasherService>();
 
 builder.Services.AddDbContext<GameQueueContext>(
-    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString(nameof(GameQueueContext)))
+    opt => {
+        var dbUrl = Environment.GetEnvironmentVariable("DB_GAME_QUEUE_URL");
+        opt.UseNpgsql(dbUrl);
+    }
 );
 
 builder.Services.AddControllers();
