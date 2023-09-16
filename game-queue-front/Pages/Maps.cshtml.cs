@@ -10,21 +10,14 @@ namespace game_queue_front.Pages {
         public List<Map> Maps { get; set; } = new List<Map>();
 
         private readonly MapService mapService;
-        private readonly GameQueueContext context;
 
         public MapsModel(
-            MapService mapService,
-            GameQueueContext context
+            MapService mapService
         ) {
             this.mapService = mapService;
-            this.context = context;
         }
 
-        public void OnGet() {
-            Maps = loadMaps();
-        }
-
-        public void OnPost(string? filterMapName, decimal? filterMapPrice) {
+        public void OnGet(string? filterMapName, decimal? filterMapPrice) {
             FilterMapName = filterMapName;
             FilterMapPrice = filterMapPrice;
 
