@@ -1,22 +1,22 @@
-﻿@page "{id}"
+﻿@page "/maps/{id}"
 @using game_queue_front.Pages.Maps
 @model MapModel
 
 <div class="card">
     @if (Model.Map == null) {
-        <h2>Map with id #@Model.MapId not found</h2>
+        <h2>Карта с номером #@Model.MapId не найдена</h2>
     } else {
         <img class="card-img-top p-3" src="@Model.Map.CoverImageUrl" alt="Minimap image" style="width: 40rem">
         <div class="card-body">
             <h3 class="card-title">@Model.Map.Name</h3>
             @Model.Map.ToString()
             <br />
-            Entry fee: <strong>@Model.Map.EntryPrice$</strong>
+            Стоимость входа: <strong>@Model.Map.EntryPrice$</strong>
             @if (Model.Map.Status == Business.Maps.MapStatus.Deleted) {
-                <h5>Not available.</h5>
+                <h5>Недоступна.</h5>
             } else {
                 <form method="post">
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger">Удалить</button>
                 </form>
             }
         </div>
