@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/maps"
 @model MapsModel
 
 <div class="container" style="display: flex">
@@ -15,7 +15,7 @@
                 <label for="FilterMapPrice" class="form-label">Стоимость входа</label>
                 <input type="number" class="form-control" id="FilterMapPrice" name="FilterMapPrice" value="@Model.FilterMapPrice" min="0">
             </div>
-            <button type="submit" class="btn btn-primary">Применит</button>
+            <button type="submit" class="btn btn-primary">Применить</button>
         </form>
     </div>
     <div class="row text-center" style="width: 100%">
@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@map.ToString()</h5>
                         <h6>Стоимость входа: <strong>@map.EntryPrice$</strong></h6>
-                        <a href="Maps/@map.Id/" class="btn btn-primary">Подробнее</a>
+                        <a href="maps/@map.Id/" class="btn btn-primary">Подробнее</a>
                     </div>
                 </div>
             </div>
