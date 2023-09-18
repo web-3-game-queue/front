@@ -21,7 +21,7 @@ namespace game_queue_front.Pages {
             this.mapService = mapService;
         }
 
-        public void OnGet() {
+        public void OnGet(string? filterMapName, decimal? filterMapPrice) {
             var mapsPath = "./static/maps.json";
 
             if (StaticDataProvider.Instance == null) {
@@ -30,16 +30,14 @@ namespace game_queue_front.Pages {
                 );
             }
 
-            Maps = new List<Map>(StaticDataProvider.Instance.Maps);
-        }
-
-        public void OnPost(string filterMapName, decimal? filterMapPrice) {
             FilterMapName = filterMapName;
             FilterMapPrice = filterMapPrice;
 
-            Maps = mapService
-                .FilterMapsByNameAndMaxPrice(StaticDataProvider.Instance.Maps, filterMapName, filterMapPrice)
-                .ToList();
+            Maps = loadMaps();
         }
+
+        private List<Map> loadMaps() => mapService
+                .FilterMapsByNameAndMaxPrice(StaticDataProvider.Instance!.Maps, FilterMapName ?? "", FilterMapPrice ?? decimal.MaxValue)
+                .ToList();
     }
 }
