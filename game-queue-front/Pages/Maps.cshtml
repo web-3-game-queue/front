@@ -5,29 +5,29 @@
     <div>
         <form method="get" class="card p-2 m-3" style="width: 250px">
             <div style="display: flex">
-                <h5>Filters</h5>
+                <h5>Фильтры</h5>
             </div>
             <div class="mb-3">
-                <label for="FilterMapName" class="form-label">Map name</label>
+                <label for="FilterMapName" class="form-label">Название карты</label>
                 <input type="text" class="form-control" id="FilterMapName" name="FilterMapName" value="@Model.FilterMapName">
             </div>
             <div class="mb-3">
-                <label for="FilterMapPrice" class="form-label">Max enter fee</label>
+                <label for="FilterMapPrice" class="form-label">Стоимость входа</label>
                 <input type="number" class="form-control" id="FilterMapPrice" name="FilterMapPrice" value="@Model.FilterMapPrice" min="0">
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <button type="submit" class="btn btn-primary">Применит</button>
         </form>
     </div>
     <div class="row text-center" style="width: 100%">
-        <h5 class="p-0">Maps:</h5>
+        <h5 class="p-0">Карты:</h5>
         @foreach (var map in Model.Maps) {
             <div class="col mb-3 mb-sm-0 p-0 p-xl-3">
                 <div class="card" style="width: auto;">
                     <img class="card-img-top" src="@map.CoverImageUrl" alt="Minimap image">
                     <div class="card-body">
                         <h5 class="card-title">@map.ToString()</h5>
-                        <h6>Entry fee: <strong>@map.EntryPrice$</strong></h6>
-                        <a href="Maps/@map.Id/" class="btn btn-primary">More details</a>
+                        <h6>Стоимость входа: <strong>@map.EntryPrice$</strong></h6>
+                        <a href="Maps/@map.Id/" class="btn btn-primary">Подробнее</a>
                     </div>
                 </div>
             </div>
