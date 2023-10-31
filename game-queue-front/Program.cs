@@ -14,7 +14,7 @@ builder.Services.AddScoped<UserService>();
 
 builder.Services.AddDbContext<GameQueueContext>(
     opt => {
-        var dbUrl = Environment.GetEnvironmentVariable("DB_GAME_QUEUE_URL");
+        var dbUrl = Environment.GetEnvironmentVariable("DB_GAME_QUEUE_URL_OLD");
         opt.UseNpgsql(dbUrl);
     }
 );
