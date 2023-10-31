@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace game_queue_front.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,31 +23,11 @@ namespace game_queue_front.Migrations
                     max_players_count = table.Column<int>(type: "integer", nullable: false),
                     cover_image_url = table.Column<string>(type: "text", nullable: false),
                     entry_price = table.Column<decimal>(type: "numeric", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false, defaultValue: 0)
+                    status = table.Column<string>(type: "text", nullable: false, defaultValue: "Available")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_maps", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "matches",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    map_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_matches", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_matches_maps_map_id",
-                        column: x => x.map_id,
-                        principalTable: "maps",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,17 +38,11 @@ namespace game_queue_front.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     hashed_password = table.Column<string>(type: "text", nullable: false),
-                    level = table.Column<int>(type: "integer", nullable: false),
-                    match_id = table.Column<int>(type: "integer", nullable: true)
+                    level = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_users", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_users_matches_match_id",
-                        column: x => x.match_id,
-                        principalTable: "matches",
-                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -78,7 +52,7 @@ namespace game_queue_front.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     creator_user_id = table.Column<int>(type: "integer", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false)
+                    status = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,11 +97,6 @@ namespace game_queue_front.Migrations
                 column: "creator_user_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_matches_map_id",
-                table: "matches",
-                column: "map_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_request_map_map_id",
                 table: "request_map",
                 column: "map_id");
@@ -136,11 +105,6 @@ namespace game_queue_front.Migrations
                 name: "ix_request_map_search_request_id",
                 table: "request_map",
                 column: "search_request_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_users_match_id",
-                table: "users",
-                column: "match_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_name",
@@ -159,13 +123,10 @@ namespace game_queue_front.Migrations
                 name: "map_search_request");
 
             migrationBuilder.DropTable(
-                name: "users");
-
-            migrationBuilder.DropTable(
-                name: "matches");
-
-            migrationBuilder.DropTable(
                 name: "maps");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }

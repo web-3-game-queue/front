@@ -16,8 +16,6 @@ namespace game_queue_front.Business.Users {
         [Range(0, int.MaxValue)]
         public int Level { get; set; }
 
-        public int? MatchId { get; set; }
-
         public List<MapSearchRequest> SearchRequests { get; } = new List<MapSearchRequest>();
     }
 }

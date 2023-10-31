@@ -23,8 +23,7 @@ namespace game_queue_front.Business.Users {
             var user = new User {
                 Name = name,
                 HashedPassword = hashedPassword,
-                Level = level,
-                MatchId = enteredMatchId
+                Level = level
             };
             await context.Users.AddAsync(user);
             context.SaveChanges();
