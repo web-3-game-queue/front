@@ -3,17 +3,20 @@ import { IndexComponent } from '../components';
 import { DemoComponent } from '../components/demo';
 import BasicExample from '../components/test';
 
-export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <IndexComponent />
-    },
-    {
-        path: '/demo',
-        element: <DemoComponent />
-    },
-    {
-        path: '/test',
-        element: <BasicExample />
-    }
-]);
+export const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <IndexComponent />
+        },
+        {
+            path: '/demo',
+            element: <DemoComponent />
+        },
+        {
+            path: '/test',
+            element: <BasicExample />
+        }
+    ],
+    { basename: '/front' }
+);
