@@ -1,9 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
 import './styles/App.css';
 import { FC } from 'react';
-import { HeaderComponent } from './Components/header';
-import { FooterComponent } from './Components/footer';
-import { RoutesComponent } from './Components/Routes';
+import { HeaderComponent } from './Components/Basic/Header';
+import { FooterComponent } from './Components/Basic/Footer';
+import { RoutesComponent } from './Components/Basic/Routes';
 
 const App: FC = () => (
     <BrowserRouter basename="/front">
