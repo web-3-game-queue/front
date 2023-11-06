@@ -1,22 +1,22 @@
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './styles/App.css';
 import { FC } from 'react';
-import { router } from './router/router';
-import { HeaderComponent } from './components/header';
-import { FooterComponent } from './components/footer';
+import { HeaderComponent } from './Components/header';
+import { FooterComponent } from './Components/footer';
+import { RoutesComponent } from './Components/Routes';
 
 const App: FC = () => (
-    <>
+    <BrowserRouter basename="/front">
         <HeaderComponent />
 
         <div className="container">
             <main role="main" className="pb-3">
-                <RouterProvider router={router} />
+                <RoutesComponent />
             </main>
         </div>
 
         <FooterComponent />
-    </>
+    </BrowserRouter>
 );
 
 export default App;
