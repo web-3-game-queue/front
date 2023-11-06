@@ -6,6 +6,6 @@ export default defineConfig({
     server: {
         port: 3000
     },
-    base: "https://github.com/web-3-game-queue/front/tree/lab-4",
+    base: "https://github.com/web-3-game-queue/front/tree/gh-pages",
     plugins: [react()],
 })
