@@ -5,10 +5,10 @@ import { DemoComponent } from '../components/demo';
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <IndexComponent/>
+        element: <IndexComponent />
     },
     {
         path: '/demo',
-        element: <DemoComponent/>
+        element: <DemoComponent />
     }
 ]);
