@@ -1,27 +1,33 @@
-import { FC } from "react";
-import { Map } from "../../../Core/Models/Map";
-import { MAP_COVER_PLACEHOLDER_URL } from "../../../Configuration";
+import { FC } from 'react';
+import { Map, MapToString } from '../../../Core/Models/Map';
+import { StaticDataAPI } from '../../../Core/APIs/StaticDataAPI';
+// import { MapStatus } from '../../../Core/Models/MapStatus';
+import { Link } from 'react-router-dom';
 
-export const MapCardComponent: FC<Map> = (map) => <div className="card">
-    <h2>Карта с номером #@Model.MapId не найдена</h2>
-    {
-        map.coverImageUrl 
-            ? <img className="card-img-top p-3" src={map.coverImageUrl} alt="Minimap image" style="width: 40rem"/>
-            : <img className="card-img-top p-3" src={MAP_COVER_PLACEHOLDER_URL} alt="Minimap image" style="width: 40rem"/>
-    }
-    <img className="card-img-top p-3" src="@Model.Map.CoverImageUrl" alt="Minimap image" style="width: 40rem"/>
-    <div className="card-body">
-        <h3 className="card-title">@Model.Map.Name</h3>
-        @Model.Map.ToString()
-        <br />
-        Стоимость входа: <strong>@Model.Map.EntryPrice$</strong>
-        @if (Model.Map.Status == Business.Maps.MapStatus.Deleted) {
-            <h5>Недоступна.</h5>
-        } else {
-            <form method="post">
-                <button className="btn btn-danger">Удалить</button>
-            </form>
-        }
-    </div>
-}
-</div>
+export const MapCardComponent: FC<Map> = (map) => {
+    const coverImageUrl = StaticDataAPI.FormMapCoverUrl(map);
+    // const controls =
+    //     map.mapStatus == MapStatus.Deleted ? (
+    //         <h5>Недоступна.</h5>
+    //     ) : (
+    //         <form method="post">
+    //             <button className="btn btn-danger">Удалить</button>
+    //         </form>
+    //     );
+    return (
+        <div className="col mb-3 mb-sm-0 p-0 p-xl-3" key={map.id}>
+            <div className="card" style={{ width: 'auto' }}>
+                <img className="card-img-top" src={coverImageUrl} alt="Minimap image" />
+                <div className="card-body">
+                    <h5 className="card-title">{MapToString(map)}</h5>
+                    <h6>
+                        Стоимость входа: <strong>{map.price}$</strong>
+                    </h6>
+                    <Link to={`./${map.id}`} className="btn btn-primary">
+                        More details
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};
