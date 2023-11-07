@@ -10,11 +10,11 @@ export const HeaderComponent: FC = () => {
             <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item active" aria-current="page">
+                        <li className="breadcrumb-item active" aria-current="page" key="path-0">
                             <Link to="/">Home</Link>
                         </li>
-                        {paths.map((path) => (
-                            <li className="breadcrumb-item" aria-current="page">
+                        {paths.map((path, id) => (
+                            <li className="breadcrumb-item" aria-current="page" key={`path-${id}`}>
                                 <Link to={path}>{path}</Link>
                             </li>
                         ))}
