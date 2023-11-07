@@ -11,18 +11,23 @@ interface MapPageComponentProps {
 
 export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageComponentProps) => {
     const [map, setMap] = useState<Map | null | undefined>(undefined);
+    const [needsUpdate, setNeedsUpdate] = useState(true);
 
     useEffect(() => {
         async function getMap() {
             const gotMap = await MapAPI.GetMap(id);
             setMap(gotMap);
         }
-        getMap();
+        if(needsUpdate) {
+            getMap();
+            setNeedsUpdate(false);
+        }
         return () => {};
-    }, [id]);
+    }, [id, needsUpdate]);
 
     const onClickDelete = async () => {
         await MapAPI.DeleteMap(id);
+        setNeedsUpdate(true);
     };
 
     if (map === null) {
