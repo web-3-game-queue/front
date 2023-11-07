@@ -11,7 +11,7 @@ export const MapListComponent: FC<MapListProps> = ({ maps }: MapListProps) => {
         <div className="container" style={{ display: 'flex' }}>
             <div className="row text-center" style={{ width: '100%' }}>
                 <h5 className="p-0">Карты:</h5>
-                {maps.map(MapCardComponent)}
+                <div className="row row-cols-3">{maps.map(MapCardComponent)}</div>
             </div>
         </div>
     );

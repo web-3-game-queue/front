@@ -12,7 +12,7 @@ export const MapsPageComponent: FC = () => {
             setMaps(maps);
         }
         getMaps();
-    });
+    }, []);
     if (!maps) {
         return <LoadingIndicator />;
     }
@@ -27,13 +27,13 @@ export const MapsPageComponent: FC = () => {
                         <label htmlFor="FilterMapName" className="form-label">
                             Название карты
                         </label>
-                        <input type="text" className="form-control" id="FilterMapName" name="FilterMapName" value="@Model.FilterMapName" />
+                        <input type="text" className="form-control" id="FilterMapName" name="FilterMapName" value="@Model.FilterMapName" readOnly />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="FilterMapPrice" className="form-label">
                             Стоимость входа
                         </label>
-                        <input type="number" className="form-control" id="FilterMapPrice" name="FilterMapPrice" value="@Model.FilterMapPrice" min="0" />
+                        <input type="number" className="form-control" id="FilterMapPrice" name="FilterMapPrice" value="@Model.FilterMapPrice" min="0" readOnly />
                     </div>
                     <button type="submit" className="btn btn-primary">
                         Применить
