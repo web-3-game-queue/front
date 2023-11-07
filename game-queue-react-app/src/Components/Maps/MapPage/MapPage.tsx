@@ -35,16 +35,16 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         map.mapStatus == MapStatus.Deleted ? (
             <h5>Недоступна.</h5>
         ) : (
-            <form method="post">
+            <div>
                 <button className="btn btn-danger" onClick={onClickDelete}>
                     Удалить
                 </button>
-            </form>
+            </div>
         );
     return (
         <div className="card" key={map.id}>
             <div className="card-body">
-                <img className="card-img-top p-3" src={coverImageUrl} alt="Minimap image" style={{ width: '40rem' }} />
+                <img src={coverImageUrl} alt="Minimap image" style={{ width: '40rem', border: '1px solid black' }} />
                 <h3 className="card-title">{map.name}</h3>
                 {MapToString(map)}
                 <br />
