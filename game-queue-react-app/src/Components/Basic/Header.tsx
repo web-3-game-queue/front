@@ -18,11 +18,11 @@ export const HeaderComponent: FC = () => (
                                 Карты
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className="nav-link text-dark" to="./createUser">
                                 Создать пользователя
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
