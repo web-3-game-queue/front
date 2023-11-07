@@ -20,4 +20,9 @@ export abstract class MapAPI {
         const map: Map = await result.json();
         return map;
     }
+
+    public static DeleteMap = async(mapId: number) => {
+        const url = `${BASE_API_URL}/${this.MAP_API_PATH}/${mapId}`;
+        await fetch(url, { method: 'DELETE' });
+    }
 }

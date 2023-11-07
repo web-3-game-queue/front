@@ -4,28 +4,31 @@ import { MapAPI } from '../../../Core/APIs/MapAPI';
 import { LoadingIndicator } from '../../UI/LoadingIndicator';
 import { MapStatus } from '../../../Core/Models/MapStatus';
 import { StaticDataAPI } from '../../../Core/APIs/StaticDataAPI';
-import { useParams } from 'react-router-dom';
 
-export const MapPageComponent: FC = () => {
-    const params = useParams();
-    console.log('params :>> ', params);
-    const { id: idStr } = useParams();
+interface MapPageComponentProps {
+    id: number;
+}
+
+export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageComponentProps) => {
     const [map, setMap] = useState<Map | null | undefined>(undefined);
+
     useEffect(() => {
         async function getMap() {
-            const map = await MapAPI.GetMap(id);
-            setMap(map);
+            const gotMap = await MapAPI.GetMap(id);
+            setMap(gotMap);
         }
         getMap();
-    });
-    if (!idStr) {
-        return <h2>Не указан id карты</h2>;
-    }
-    const id = parseInt(idStr);
-    if (map == undefined) {
-        return <LoadingIndicator />;
-    } else if (map == null) {
+        return () => {};
+    }, [id]);
+
+    const onClickDelete = async () => {
+        await MapAPI.DeleteMap(id);
+    };
+
+    if (map === null) {
         return <h2>Карта с номером #{id} не найдена</h2>;
+    } else if (map == undefined) {
+        return <LoadingIndicator />;
     }
     const coverImageUrl = StaticDataAPI.FormMapCoverUrl(map);
     const controls =
@@ -33,7 +36,9 @@ export const MapPageComponent: FC = () => {
             <h5>Недоступна.</h5>
         ) : (
             <form method="post">
-                <button className="btn btn-danger">Удалить</button>
+                <button className="btn btn-danger" onClick={onClickDelete}>
+                    Удалить
+                </button>
             </form>
         );
     return (
