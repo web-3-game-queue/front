@@ -4,8 +4,14 @@ import { Map } from "../Models/Map";
 export abstract class MapAPI {
     public static readonly MAP_API_PATH = 'map';
 
-    public static GetMaps = async () => {
-        const url = `${BASE_API_URL}/${this.MAP_API_PATH}/`;
+    public static GetMaps = async (filterName?: string, maxPrice?: number) => {
+        const url = new URL(`${BASE_API_URL}/${this.MAP_API_PATH}/`);
+        if (filterName) {
+            url.searchParams.append('filterName', filterName);
+        }
+        if(maxPrice) {
+            url.searchParams.append('maxPrice', maxPrice.toString());
+        }
         const result = await fetch(url, { method: 'GET' });
         const maps: Map[] = await result.json();
         return maps;
@@ -22,7 +28,7 @@ export abstract class MapAPI {
     }
 
     public static DeleteMap = async (mapId: number) => {
-        const url = `${BASE_API_URL}/${this.MAP_API_PATH}/${mapId}`;
+        const url = `${BASE_API_URL}/${this.MAP_API_PATH}/delete/${mapId}`;
         await fetch(url, { method: 'DELETE' });
         console.log('Marked as deleted map with id', mapId);
     }

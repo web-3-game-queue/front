@@ -44,7 +44,31 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     return (
         <div className="card" key={map.id}>
             <div className="card-body">
-                <img src={coverImageUrl} alt="Minimap image" style={{ width: '40rem', border: '1px solid black' }} />
+            <div
+                    style={{
+                        height: '30rem',
+                        position: 'relative'
+                    }}
+                >
+                    <img
+                        src={coverImageUrl}
+                        alt="Minimap image"
+                        style={{
+                            maxWidth: '100%',
+                            maxHeight: '100%',
+                            resize: 'both',
+                            position: 'absolute',
+                            top: 0,
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            margin: 'auto',
+                            width: 'auto',
+                            height: 'auto',
+                            border: '1px solid black'
+                        }}
+                    />
+                </div>
                 <h3 className="card-title">{map.name}</h3>
                 {MapToString(map)}
                 <br />
