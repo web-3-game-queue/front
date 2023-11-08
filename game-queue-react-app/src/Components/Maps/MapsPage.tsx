@@ -7,22 +7,22 @@ import { LoadingIndicator } from '../UI/LoadingIndicator';
 export const MapsPageComponent: FC = () => {
     const [maps, setMaps] = useState<Map[] | undefined>(undefined);
     const [filterName, setFilterName] = useState<string | undefined>(undefined);
-    const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+    const [maxPlayersCount, setMaxPlayersCount] = useState<number | undefined>(undefined);
     useEffect(() => {
         async function getMaps() {
-            const maps = await MapAPI.GetMaps(filterName, maxPrice);
+            const maps = await MapAPI.GetMaps(filterName, maxPlayersCount);
             setMaps(maps);
         }
         getMaps();
-    }, [filterName, maxPrice]);
+    }, [filterName, maxPlayersCount]);
 
     const filterNameInput = useRef<HTMLInputElement>(null);
-    const maxPriceInput = useRef<HTMLInputElement>(null);
+    const maxPlayersCountInput = useRef<HTMLInputElement>(null);
 
     function handleSubmit(event: React.FormEvent) {
         setFilterName(filterNameInput.current?.value);
-        if (maxPriceInput.current) {
-            setMaxPrice(parseInt(maxPriceInput.current.value));
+        if (maxPlayersCountInput.current) {
+            setMaxPlayersCount(parseInt(maxPlayersCountInput.current.value));
         }
         event.preventDefault()
     }
@@ -44,10 +44,10 @@ export const MapsPageComponent: FC = () => {
                         <input type="text" className="form-control" id="FilterMapName" name="FilterMapName" ref={filterNameInput} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="FilterMapPrice" className="form-label">
-                            Стоимость входа
+                        <label htmlFor="FilterMapMaxPlayersCount" className="form-label">
+                            Максимальное количество игроков
                         </label>
-                        <input type="number" className="form-control" id="FilterMapPrice" name="FilterMapPrice" min="0" ref={maxPriceInput} />
+                        <input type="number" className="form-control" id="FilterMapMaxPlayersCount" name="FilterMapMaxPlayersCount" min="0" ref={maxPlayersCountInput} />
                     </div>
                     <button type="submit" className="btn btn-primary">
                         Применить

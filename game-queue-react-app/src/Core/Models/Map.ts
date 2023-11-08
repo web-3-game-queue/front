@@ -7,7 +7,6 @@ export type Map = {
     height: number,
     maxPlayersCount: number,
     coverImageUrl?: string,
-    price: number,
     mapStatus: MapStatus
 };
 

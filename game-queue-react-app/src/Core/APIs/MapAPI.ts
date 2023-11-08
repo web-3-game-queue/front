@@ -4,13 +4,13 @@ import { Map } from "../Models/Map";
 export abstract class MapAPI {
     public static readonly MAP_API_PATH = 'map';
 
-    public static GetMaps = async (filterName?: string, maxPrice?: number) => {
+    public static GetMaps = async (filterName?: string, maxPlayersCount?: number) => {
         const url = new URL(`${BASE_API_URL}/${this.MAP_API_PATH}/`);
         if (filterName) {
             url.searchParams.append('filterName', filterName);
         }
-        if(maxPrice) {
-            url.searchParams.append('maxPrice', maxPrice.toString());
+        if (maxPlayersCount) {
+            url.searchParams.append('maxPlayersCount', maxPlayersCount.toString());
         }
         const result = await fetch(url, { method: 'GET' });
         const maps: Map[] = await result.json();

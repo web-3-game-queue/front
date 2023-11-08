@@ -77,7 +77,6 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
                 <h3 className="card-title">{map.name}</h3>
                 {MapToString(map)}
                 <br />
-                Стоимость входа: <strong>{map.price}$</strong>
                 {controls}
             </div>
         </div>

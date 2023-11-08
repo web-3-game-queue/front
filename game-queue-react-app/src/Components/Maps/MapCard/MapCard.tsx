@@ -36,9 +36,6 @@ export const MapCardComponent: FC<Map> = (map) => {
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">{MapToString(map)}</h5>
-                    <h6>
-                        Стоимость входа: <strong>{map.price}$</strong>
-                    </h6>
                     <Link to={`./${map.id}`} className="btn btn-primary">
                         More details
                     </Link>
