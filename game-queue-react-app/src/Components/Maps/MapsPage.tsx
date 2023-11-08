@@ -24,12 +24,33 @@ export const MapsPageComponent: FC = () => {
         if (maxPlayersCountInput.current) {
             setMaxPlayersCount(parseInt(maxPlayersCountInput.current.value));
         }
-        event.preventDefault()
+        event.preventDefault();
     }
 
     if (!maps) {
         return <LoadingIndicator />;
     }
+    const mapsDisplay =
+        maps.length == 0 ? (
+            <div
+                className="container"
+                style={{
+                    display: 'table',
+                    textAlign: 'center'
+                }}
+            >
+                <span
+                    style={{
+                        display: 'table-cell',
+                        verticalAlign: 'middle'
+                    }}
+                >
+                    <h3>Не найдено</h3>
+                </span>
+            </div>
+        ) : (
+            <MapListComponent maps={maps} />
+        );
     return (
         <div className="container" style={{ display: 'flex' }}>
             <div>
@@ -54,7 +75,7 @@ export const MapsPageComponent: FC = () => {
                     </button>
                 </form>
             </div>
-            <MapListComponent maps={maps} />
+            {mapsDisplay}
         </div>
     );
 };
