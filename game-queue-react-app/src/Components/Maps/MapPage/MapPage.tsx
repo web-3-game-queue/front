@@ -18,7 +18,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
             const gotMap = await MapAPI.GetMap(id);
             setMap(gotMap);
         }
-        if(needsUpdate) {
+        if (needsUpdate) {
             getMap();
             setNeedsUpdate(false);
         }
@@ -46,10 +46,11 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
                 </button>
             </div>
         );
+    const description = map.description ? <span>{map.description}</span> : <span className="text-body-secondary">Описание отсутствует</span>;
     return (
         <div className="card" key={map.id}>
             <div className="card-body">
-            <div
+                <div
                     style={{
                         height: '30rem',
                         position: 'relative'
@@ -77,6 +78,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
                 <h3 className="card-title">{map.name}</h3>
                 {MapToString(map)}
                 <br />
+                {description}
                 {controls}
             </div>
         </div>

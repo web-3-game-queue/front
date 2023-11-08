@@ -45,7 +45,7 @@ export const MapsPageComponent: FC = () => {
                         verticalAlign: 'middle'
                     }}
                 >
-                    <h3>Не найдено</h3>
+                    <h3 className="text-body-secondary">Не найдено</h3>
                 </span>
             </div>
         ) : (
