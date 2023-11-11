@@ -47,4 +47,44 @@ export abstract class SearchMapsRequestAPI {
             return null;
         }
     }
+
+    public static ComposeRequest = async (requestId: number) => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/compose/${requestId}`;
+        try {
+            const result = await axios.put(url);
+            return result.status == 200;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    public static DeleteRequest = async (requestId: number) => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/delete/${requestId}`;
+        try {
+            const result = await axios.delete(url);
+            return result.status == 200;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    public static CancelRequest = async (requestId: number) => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/cancel/${requestId}`;
+        try {
+            const result = await axios.put(url);
+            return result.status == 200;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    public static FinishRequest = async (requestId: number) => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/finish/${requestId}`;
+        try {
+            const result = await axios.put(url);
+            return result.status == 200;
+        } catch (error) {
+            return null;
+        }
+    }
 }

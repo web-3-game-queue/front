@@ -40,11 +40,16 @@ export const dataSlice = createSlice({
         },
         setCurrentRequestId: (state, action: PayloadAction<number | null>) => {
             state.currentRequestId = action.payload;
+        },
+        reset: (state) => {
+            state.mapIds = initialState.mapIds;
+            state.auth = initialState.auth;
+            state.currentRequestId = initialState.currentRequestId;
         }
     }
 });
 
-export const { setMapIds, addMapId, removeMapId, setAuth, setCurrentRequestId } = dataSlice.actions;
+export const { setMapIds, addMapId, removeMapId, setAuth, setCurrentRequestId, reset } = dataSlice.actions;
 
 export const useMapIds = () =>
     useSelector((state: RootState) => state.store.mapIds);

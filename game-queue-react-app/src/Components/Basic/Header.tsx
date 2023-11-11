@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { setAuth, useAuth } from '../../Core/Storage/DataSlice';
+import { reset, useAuth } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { COOKIES } from '../../Core/Cookies';
 import { TOKEN_COOKIE } from '../../Configuration';
@@ -16,7 +16,7 @@ export const HeaderComponent: FC = () => {
 
     function logOut() {
         COOKIES.remove(TOKEN_COOKIE, { sameSite: true, secure: true });
-        dispatch(setAuth(null));
+        dispatch(reset());
     }
 
     const loginDisplay =
