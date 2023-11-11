@@ -15,4 +15,25 @@ export abstract class SearchMapsRequestAPI {
             return null;
         }
     }
+
+    public static AddMapToRequest = async (mapId: number) => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/add_map/${mapId}`;
+        try {
+            const result = await axios.put(url);
+            const searchMapsRequestId: number = result.data;
+            return searchMapsRequestId;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    public static RemoveMapFromRequest = async (mapId: number) => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/remove_map/${mapId}`;
+        try {
+            const result = await axios.delete(url);
+            return result.status == 200;
+        } catch (error) {
+            return null;
+        }
+    }
 }

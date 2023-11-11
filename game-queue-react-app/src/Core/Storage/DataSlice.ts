@@ -9,7 +9,7 @@ export interface IStoreState {
 }
 
 const initialState: IStoreState = {
-    mapIds: [1, 2, 3],
+    mapIds: [],
     login: null,
     currentRequestId: null
 }
