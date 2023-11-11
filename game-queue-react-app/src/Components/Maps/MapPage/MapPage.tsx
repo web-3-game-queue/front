@@ -7,7 +7,7 @@ import { SearchMapsRequestAPI } from '../../../Core/APIs/SearchMapsRequestAPI';
 import { useDispatch } from 'react-redux';
 import { addMapId, removeMapId, setCurrentRequestId, useAuth } from '../../../Core/Storage/DataSlice';
 import { AuthenticationAPI } from '../../../Core/APIs/AuthenticationAPI';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface MapPageComponentProps {
     id: number;
@@ -18,6 +18,8 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     const [needsUpdate, setNeedsUpdate] = useState(true);
     const [added, setAdded] = useState<boolean>(false);
     const [isMod, setIsMod] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     const auth = useAuth();
     const dispatch = useDispatch();
@@ -59,10 +61,14 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         dispatch(removeMapId(id));
     };
 
+    const onClickBack = () => {
+        navigate(-1);
+    };
+
     const backButton = (
-        <Link to="..">
-            <button className="btn btn-secondary">Назад</button>
-        </Link>
+        <button className="btn btn-secondary" onClick={onClickBack}>
+            Назад
+        </button>
     );
 
     const addButton =
