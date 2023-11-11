@@ -5,12 +5,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './styles/index.css';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
 import { TOKEN_COOKIE } from './Configuration.ts';
+import { COOKIES } from './Core/Cookies.ts';
 
 axios.interceptors.request.use((config) => {
-    const cookies = new Cookies();
-    config.headers.Authorization = cookies.get(TOKEN_COOKIE);
+    config.headers.Authorization = COOKIES.get(TOKEN_COOKIE);
     console.log('Setting axios cookie header');
     return config;
 });

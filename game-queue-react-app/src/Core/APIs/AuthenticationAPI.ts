@@ -17,8 +17,7 @@ export abstract class AuthenticationAPI {
             url.searchParams.append('login', login);
             url.searchParams.append('password', password);
             const result = await axios.post(url.toString());
-            // const result = await fetch(url, { method: 'POST' });
-            const token: string = await result.data;
+            const token: string = result.data;
             return token;
         } catch (error) {
             return null;

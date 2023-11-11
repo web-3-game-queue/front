@@ -1,7 +1,6 @@
 import { FC, useRef } from 'react';
 import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
-import Cookies from 'universal-cookie';
-import { TOKEN_COOKIE } from '../../Configuration';
+import { setAuthorization } from '../../Core/Cookies';
 
 export const LoginComponent: FC = () => {
     const loginInput = useRef<HTMLInputElement>(null);
@@ -11,12 +10,10 @@ export const LoginComponent: FC = () => {
         event.preventDefault();
         const login = loginInput.current?.value ?? '';
         const password = passwordInput.current?.value ?? '';
-        const loginResult = await AuthenticationAPI.Login(login, password);
-        if (loginResult !== null) {
-            const cookies = new Cookies();
-            cookies.set(TOKEN_COOKIE, `Bearer ${loginResult}`, { sameSite: true });
+        const token = await AuthenticationAPI.Login(login, password);
+        if (token !== null) {
+            setAuthorization(token);
         }
-        console.log('loginResult :>> ', loginResult);
     }
 
     return (
