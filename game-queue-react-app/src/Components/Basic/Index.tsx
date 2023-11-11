@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { useLogin } from '../../Core/Storage/DataSlice';
+import { useAuth } from '../../Core/Storage/DataSlice';
 
 export const IndexComponent: FC = () => {
-    const login = useLogin();
+    const login = useAuth();
 
     const invite =
         login === null ? (

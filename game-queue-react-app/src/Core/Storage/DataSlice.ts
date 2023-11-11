@@ -2,15 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useSelector } from "react-redux";
 import { RootState } from "./Store";
 
+interface IAuth {
+    login: string,
+    selfId: number
+}
+
 export interface IStoreState {
     mapIds: number[],
-    login: string | null,
+    auth: IAuth | null,
     currentRequestId: number | null
 }
 
 const initialState: IStoreState = {
     mapIds: [],
-    login: null,
+    auth: null,
     currentRequestId: null
 }
 
@@ -30,8 +35,8 @@ export const dataSlice = createSlice({
                 state.mapIds.splice(index, 1);
             }
         },
-        setLogin: (state, action: PayloadAction<string | null>) => {
-            state.login = action.payload;
+        setAuth: (state, action: PayloadAction<IAuth | null>) => {
+            state.auth = action.payload;
         },
         setCurrentRequestId: (state, action: PayloadAction<number | null>) => {
             state.currentRequestId = action.payload;
@@ -39,13 +44,15 @@ export const dataSlice = createSlice({
     }
 });
 
-export const { setMapIds, addMapId, removeMapId, setLogin, setCurrentRequestId } = dataSlice.actions;
+export const { setMapIds, addMapId, removeMapId, setAuth, setCurrentRequestId } = dataSlice.actions;
 
 export const useMapIds = () =>
     useSelector((state: RootState) => state.store.mapIds);
 
-export const useLogin = () =>
-    useSelector((state: RootState) => state.store.login);
+export const useAuth = () =>
+    useSelector((state: RootState) => {
+        return state.store.auth;
+    });
 
 export const useCurrentRequestId = () =>
     useSelector((state: RootState) => state.store.currentRequestId);

@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { setLogin, useLogin } from '../../Core/Storage/DataSlice';
+import { setAuth, useAuth } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { COOKIES } from '../../Core/Cookies';
 import { TOKEN_COOKIE } from '../../Configuration';
 import { ShopcartComponent } from '../Shopcart';
 
 export const HeaderComponent: FC = () => {
-    const login = useLogin();
+    const auth = useAuth();
     const location = useLocation();
     const paths = location.pathname.split('/').filter((x) => x !== '');
     const lastPath = paths.splice(paths.length - 1);
@@ -16,11 +16,11 @@ export const HeaderComponent: FC = () => {
 
     function logOut() {
         COOKIES.remove(TOKEN_COOKIE);
-        dispatch(setLogin(null));
+        dispatch(setAuth(null));
     }
 
     const loginDisplay =
-        login === null ? (
+        auth === null ? (
             <div>
                 <Link className="btn btn-primary" to="/login">
                     Войти
@@ -31,7 +31,7 @@ export const HeaderComponent: FC = () => {
             </div>
         ) : (
             <div>
-                Login: <div className="btn btn-primary disabled">{login}</div>
+                Login: <div className="btn btn-primary disabled">{auth.login}</div>
                 <button className="btn btn-info ms-1" style={{ position: 'absolute' }} onClick={logOut}>
                     Logout
                 </button>
@@ -39,7 +39,7 @@ export const HeaderComponent: FC = () => {
         );
 
     const cartLink =
-        login === null ? (
+        auth === null ? (
             <></>
         ) : (
             <li className="nav-item">

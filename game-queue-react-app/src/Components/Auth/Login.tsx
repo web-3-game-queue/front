@@ -3,7 +3,7 @@ import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
 import { setAuthorization } from '../../Core/Cookies';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setCurrentRequestId, setLogin, setMapIds } from '../../Core/Storage/DataSlice';
+import { setCurrentRequestId, setAuth, setMapIds } from '../../Core/Storage/DataSlice';
 import { SearchMapsRequestAPI } from '../../Core/APIs/SearchMapsRequestAPI';
 
 export const LoginComponent: FC = () => {
@@ -26,7 +26,12 @@ export const LoginComponent: FC = () => {
             errorMsg.current?.classList.add('d-none');
             setAuthorization(token);
             const me = await AuthenticationAPI.GetMe();
-            dispatch(setLogin(me.name ?? '[ДАННЫЕ ███████]'));
+            dispatch(
+                setAuth({
+                    login: me.name ?? '[ДАННЫЕ ███████]',
+                    selfId: me.id!
+                })
+            );
             const currentRequest = await SearchMapsRequestAPI.GetCurrent();
             console.log('currentRequest :>> ', currentRequest);
             if (currentRequest !== null) {

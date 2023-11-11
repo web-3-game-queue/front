@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { addMapId, removeMapId, useLogin, useMapIds } from '../Core/Storage/DataSlice';
+import { addMapId, removeMapId, useAuth, useMapIds } from '../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { Utils } from '../Core/Utils';
 import { AuthenticationAPI } from '../Core/APIs/AuthenticationAPI';
 
 export const TestComponent: FC = () => {
     const mapIds = useMapIds();
-    const login = useLogin();
+    const login = useAuth();
     const dispatch = useDispatch();
 
     function add() {

@@ -25,7 +25,6 @@ export const MapListComponent: FC<MapListProps> = ({ maps }: MapListProps) => {
                 setSelectedMapIds([]);
                 return;
             }
-            console.log('currentRequest :>> ', currentRequest);
             setSelectedMapIds(currentRequest.maps!.map((x) => x.id!));
         }
 
