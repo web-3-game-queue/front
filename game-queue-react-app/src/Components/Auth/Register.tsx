@@ -40,7 +40,7 @@ export const RegisterComponent: FC = () => {
 
     return (
         <div>
-            <form method="get" className="card p-2 m-3" style={{ width: '250px' }} onSubmit={(e) => handleSubmit(e)}>
+            <form method="get" className="card p-2 m-3" style={{ width: '250px', display: 'inline-block' }} onSubmit={(e) => handleSubmit(e)}>
                 <div style={{ display: 'flex' }}>
                     <h5>Регистрация</h5>
                 </div>
@@ -69,6 +69,7 @@ export const RegisterComponent: FC = () => {
                     Ошибка входа: неверный логин или пароль.
                 </div>
             </form>
+            <br />
             Уже есть аккаунт? <Link to="/login">Войти.</Link>
         </div>
     );

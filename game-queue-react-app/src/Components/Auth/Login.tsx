@@ -23,7 +23,7 @@ export const LoginComponent: FC = () => {
 
     return (
         <div>
-            <form method="get" className="card p-2 m-3 needs-validation" style={{ width: '250px' }} onSubmit={(e) => handleSubmit(e)}>
+            <form method="get" className="card p-2 m-3 needs-validation" style={{ width: '250px', display: 'inline-block' }} onSubmit={(e) => handleSubmit(e)}>
                 <div style={{ display: 'flex' }}>
                     <h5>Вход в систему</h5>
                 </div>
@@ -46,6 +46,7 @@ export const LoginComponent: FC = () => {
                     Ошибка входа: неверный логин или пароль.
                 </div>
             </form>
+            <br />
             Еще нет аккаунта? <Link to="/register">Зарегистрироваться.</Link>
         </div>
     );
