@@ -4,6 +4,7 @@ import { setLogin, useLogin } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { COOKIES } from '../../Core/Cookies';
 import { TOKEN_COOKIE } from '../../Configuration';
+import { ShopcartComponent } from '../Shopcart';
 
 export const HeaderComponent: FC = () => {
     const login = useLogin();
@@ -53,7 +54,10 @@ export const HeaderComponent: FC = () => {
                         {lastPath}
                     </li>
                 </ol>
-                {loginDisplay}
+                <div>
+                    {loginDisplay}
+                    <ShopcartComponent />
+                </div>
             </nav>
 
             <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
