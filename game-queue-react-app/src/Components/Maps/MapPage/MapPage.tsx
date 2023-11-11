@@ -56,6 +56,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     const onClickDelete = async () => {
         await MapAPI.DeleteMap(id);
         setNeedsUpdate(true);
+        dispatch(removeMapId(id));
     };
 
     const backButton = (
