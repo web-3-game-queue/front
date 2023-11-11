@@ -38,6 +38,17 @@ export const HeaderComponent: FC = () => {
             </div>
         );
 
+    const cartLink =
+        login === null ? (
+            <></>
+        ) : (
+            <li className="nav-item">
+                <Link className="nav-link text-dark" to="./cart">
+                    Выбранные карты
+                </Link>
+            </li>
+        );
+
     return (
         <header>
             <nav className="navbar container" aria-label="breadcrumb">
@@ -75,11 +86,7 @@ export const HeaderComponent: FC = () => {
                                     Карты
                                 </Link>
                             </li>
-                            {/* <li className="nav-item">
-                            <Link className="nav-link text-dark" to="./createUser">
-                                Создать пользователя
-                            </Link>
-                        </li> */}
+                            {cartLink}
                         </ul>
                     </div>
                 </div>
