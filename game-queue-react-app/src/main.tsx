@@ -9,8 +9,10 @@ import { TOKEN_COOKIE } from './Configuration.ts';
 import { COOKIES } from './Core/Cookies.ts';
 
 axios.interceptors.request.use((config) => {
-    config.headers.Authorization = COOKIES.get(TOKEN_COOKIE);
-    console.log('Setting axios cookie header');
+    const authCookie = COOKIES.get(TOKEN_COOKIE);
+    if (authCookie) {
+        config.headers.Authorization = authCookie;
+    }
     return config;
 });
 

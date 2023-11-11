@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BrowserRouter } from 'react-router-dom';
 import './styles/App.css';
 import { FC } from 'react';
 import { HeaderComponent } from './Components/Basic/Header';
 import { FooterComponent } from './Components/Basic/Footer';
 import { ErrorBoundary } from 'react-error-boundary';
-import { TestComponent } from './Components/Test';
 import { Provider } from 'react-redux';
 import { store, persistor } from './Core/Storage/Store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -24,7 +22,6 @@ const App: FC = () => (
                             <RoutesComponent />
                         </main>
                     </div>
-                    <TestComponent />
 
                     <FooterComponent />
                 </BrowserRouter>

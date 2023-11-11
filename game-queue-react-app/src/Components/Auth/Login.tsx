@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react';
 import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
 import { setAuthorization } from '../../Core/Cookies';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLogin } from '../../Core/Storage/DataSlice';
 
@@ -9,6 +9,8 @@ export const LoginComponent: FC = () => {
     const loginInput = useRef<HTMLInputElement>(null);
     const passwordInput = useRef<HTMLInputElement>(null);
     const errorMsg = useRef<HTMLDivElement>(null);
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -24,6 +26,7 @@ export const LoginComponent: FC = () => {
             const me = await AuthenticationAPI.GetMe();
             dispatch(setLogin(me.name ?? '[ДАННЫЕ ███████]'));
             errorMsg.current?.classList.add('d-none');
+            navigate('/');
         }
     }
 

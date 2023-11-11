@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthorizationAPI } from '../../Core/APIs/AuthorizationAPI';
 
 export const RegisterComponent: FC = () => {
@@ -7,6 +7,8 @@ export const RegisterComponent: FC = () => {
     const passwordInput = useRef<HTMLInputElement>(null);
     const repeatPasswordInput = useRef<HTMLInputElement>(null);
     const errorMsg = useRef<HTMLDivElement>(null);
+
+    const navigate = useNavigate();
 
     function showError(text: string) {
         if (errorMsg.current === null) {
@@ -34,6 +36,7 @@ export const RegisterComponent: FC = () => {
         if (token === null) {
             showError('Пользователь с таким логином уже зарегистрирован.');
         } else {
+            navigate('/login');
             hideError();
         }
     }
