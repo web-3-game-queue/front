@@ -1,0 +1,1 @@
+docker build . -f Dockerfile -t alordash/game-queue-front-host:latest
