@@ -1,10 +1,42 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { setLogin, useLogin } from '../../Core/Storage/DataSlice';
+import { useDispatch } from 'react-redux';
+import { COOKIES } from '../../Core/Cookies';
+import { TOKEN_COOKIE } from '../../Configuration';
 
 export const HeaderComponent: FC = () => {
+    const login = useLogin();
     const location = useLocation();
     const paths = location.pathname.split('/').filter((x) => x !== '');
     const lastPath = paths.splice(paths.length - 1);
+
+    const dispatch = useDispatch();
+
+    function logOut() {
+        COOKIES.remove(TOKEN_COOKIE);
+        dispatch(setLogin(null));
+    }
+
+    const loginDisplay =
+        login === null ? (
+            <div>
+                <Link className="btn btn-primary" to="/login">
+                    Войти
+                </Link>{' '}
+                <Link className="btn btn-primary" to="/register">
+                    Зарегистрироваться
+                </Link>
+            </div>
+        ) : (
+            <div>
+                Login: <div className="btn btn-primary disabled">{login}</div>
+                <button className="btn btn-info ms-1" style={{ position: 'absolute' }} onClick={logOut}>
+                    Logout
+                </button>
+            </div>
+        );
+
     return (
         <header>
             <nav className="navbar container" aria-label="breadcrumb">
@@ -21,6 +53,7 @@ export const HeaderComponent: FC = () => {
                         {lastPath}
                     </li>
                 </ol>
+                {loginDisplay}
             </nav>
 
             <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">

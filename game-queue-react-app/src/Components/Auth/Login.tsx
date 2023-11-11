@@ -2,11 +2,15 @@ import { FC, useRef } from 'react';
 import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
 import { setAuthorization } from '../../Core/Cookies';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../Core/Storage/DataSlice';
 
 export const LoginComponent: FC = () => {
     const loginInput = useRef<HTMLInputElement>(null);
     const passwordInput = useRef<HTMLInputElement>(null);
     const errorMsg = useRef<HTMLDivElement>(null);
+
+    const dispatch = useDispatch();
 
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
@@ -17,6 +21,8 @@ export const LoginComponent: FC = () => {
         errorMsg.current?.classList.remove('d-none');
         if (token !== null) {
             setAuthorization(token);
+            const me = await AuthenticationAPI.GetMe();
+            dispatch(setLogin(me.name ?? '[ДАННЫЕ ███████]'));
             errorMsg.current?.classList.add('d-none');
         }
     }

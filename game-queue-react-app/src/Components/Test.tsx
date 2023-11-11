@@ -1,11 +1,12 @@
 import { FC } from 'react';
-import { addMapId, removeMapId, useMapIds } from '../Core/Storage/DataSlice';
+import { addMapId, removeMapId, useLogin, useMapIds } from '../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { Utils } from '../Core/Utils';
 import { AuthenticationAPI } from '../Core/APIs/AuthenticationAPI';
 
 export const TestComponent: FC = () => {
     const mapIds = useMapIds();
+    const login = useLogin();
     const dispatch = useDispatch();
 
     function add() {
@@ -26,6 +27,7 @@ export const TestComponent: FC = () => {
 
     return (
         <>
+            Login: {login}
             <button className="btn btn-primary" onClick={add}>
                 Add
             </button>

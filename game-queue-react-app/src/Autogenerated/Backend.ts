@@ -92,7 +92,8 @@ export interface User {
     /** @format int32 */
     level?: number;
     role?: UserRole;
-}
+    claims?: string[] | null;
+  }
 
 export enum UserRole {
     Client = "Client",
