@@ -2,13 +2,14 @@ import { FC } from 'react';
 import { addMapId, removeMapId, useMapIds } from '../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { Utils } from '../Core/Utils';
+import { AuthenticationAPI } from '../Core/APIs/AuthenticationAPI';
 
 export const TestComponent: FC = () => {
     const mapIds = useMapIds();
     const dispatch = useDispatch();
 
     function add() {
-        dispatch(addMapId(mapIds.length + 1));
+        dispatch(addMapId(Math.max(0, ...mapIds) + 1));
     }
 
     function remove() {
@@ -18,6 +19,11 @@ export const TestComponent: FC = () => {
         dispatch(removeMapId(removeElement));
     }
 
+    async function testMe() {
+        const me = await AuthenticationAPI.GetMe();
+        console.log('me :>> ', me);
+    }
+
     return (
         <>
             <button className="btn btn-primary" onClick={add}>
@@ -25,6 +31,9 @@ export const TestComponent: FC = () => {
             </button>
             <button className="btn btn-secondary" onClick={remove}>
                 Remove
+            </button>
+            <button className="btn btn-info" onClick={testMe}>
+                Test me
             </button>
             MapIds:
             {mapIds.map((m) => (

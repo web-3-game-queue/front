@@ -1,6 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import storeReducer from "./DataSlice";
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+    persistReducer,
+    persistStore,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
@@ -14,7 +23,13 @@ const persistedReducer = persistReducer<ReturnType<typeof storeReducer>>(
 export const store = configureStore({
     reducer: {
         store: persistedReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        })
 });
 
 export const persistor = persistStore(store);
