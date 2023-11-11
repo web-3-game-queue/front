@@ -18,6 +18,9 @@ export const dataSlice = createSlice({
     name: "storage",
     initialState,
     reducers: {
+        setMapIds: (state, action: PayloadAction<number[]>) => {
+            state.mapIds = action.payload;
+        },
         addMapId: (state, action: PayloadAction<number>) => {
             state.mapIds.push(action.payload);
         },
@@ -36,7 +39,7 @@ export const dataSlice = createSlice({
     }
 });
 
-export const { addMapId, removeMapId, setLogin, setCurrentRequestId } = dataSlice.actions;
+export const { setMapIds, addMapId, removeMapId, setLogin, setCurrentRequestId } = dataSlice.actions;
 
 export const useMapIds = () =>
     useSelector((state: RootState) => state.store.mapIds);

@@ -16,6 +16,17 @@ export abstract class SearchMapsRequestAPI {
         }
     }
 
+    public static GetCurrent = async () => {
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/current`;
+        try {
+            const result = await axios.get(url);
+            const searchMapRequestVerbose: SearchMapsRequestVerbose = result.data;
+            return searchMapRequestVerbose;
+        } catch (error) {
+            return null;
+        }
+    }
+
     public static AddMapToRequest = async (mapId: number) => {
         const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/add_map/${mapId}`;
         try {
