@@ -23,6 +23,7 @@ export const LoginComponent: FC = () => {
         const token = await AuthenticationAPI.Login(login, password);
         errorMsg.current?.classList.remove('d-none');
         if (token !== null) {
+            errorMsg.current?.classList.add('d-none');
             setAuthorization(token);
             const me = await AuthenticationAPI.GetMe();
             dispatch(setLogin(me.name ?? '[ДАННЫЕ ███████]'));
@@ -32,7 +33,6 @@ export const LoginComponent: FC = () => {
                 dispatch(setCurrentRequestId(currentRequest.id!));
                 dispatch(setMapIds(currentRequest.maps!.map((x) => x.id!)));
             }
-            errorMsg.current?.classList.add('d-none');
             navigate('/');
         }
     }
