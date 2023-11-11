@@ -4,6 +4,7 @@ import { IndexComponent } from './Index';
 import { MapsPageComponent } from '../Maps/MapsPage';
 import { MapPageParamIdComponent } from '../Maps/MapPage/MapPageParamId';
 import { LoginComponent } from '../Auth/Login';
+import { RegisterComponent } from '../Auth/Register';
 
 export const RoutesComponent: FC = () => (
     <Routes>
@@ -12,5 +13,6 @@ export const RoutesComponent: FC = () => (
         <Route path="/maps" element={<MapsPageComponent />} />
         <Route path="/maps/:id" element={<MapPageParamIdComponent />} />
         <Route path="/login" element={<LoginComponent />} />
+        <Route path="/register" element={<RegisterComponent />} />
     </Routes>
 );
