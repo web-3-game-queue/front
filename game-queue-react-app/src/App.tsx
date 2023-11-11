@@ -7,23 +7,27 @@ import { FooterComponent } from './Components/Basic/Footer';
 import { ErrorBoundary } from 'react-error-boundary';
 import { TestComponent } from './Components/Test';
 import { Provider } from 'react-redux';
-import { store } from './Core/Storage/Store';
+import { store, persistor } from './Core/Storage/Store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { LoadingIndicator } from './Components/UI/LoadingIndicator';
 
 const App: FC = () => (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
         <Provider store={store}>
-            <BrowserRouter basename="/front">
-                <HeaderComponent />
+            <PersistGate loading={<LoadingIndicator />} persistor={persistor}>
+                <BrowserRouter basename="/front">
+                    <HeaderComponent />
 
-                {/* <div className="container">
+                    {/* <div className="container">
                     <main role="main" className="pb-3">
                         <RoutesComponent />
                     </main>
                 </div> */}
-                <TestComponent />
+                    <TestComponent />
 
-                <FooterComponent />
-            </BrowserRouter>
+                    <FooterComponent />
+                </BrowserRouter>
+            </PersistGate>
         </Provider>
     </ErrorBoundary>
 );
