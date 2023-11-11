@@ -24,4 +24,21 @@ export abstract class AuthenticationAPI {
             return null;
         }
     }
+
+    private static readonly MOD_ROLES = ['Moderator', 'Administrator'];
+    public static IsMod = async () => {
+        try {
+            const me = await this.GetMe();
+            for (const mod_role of this.MOD_ROLES) {
+                if (me.claims?.indexOf(mod_role) != -1) {
+                    console.log('me :>> ', me);
+                    console.log('mod_role :>> ', mod_role);
+                    return true;
+                }
+            }
+            return false;
+        } catch (error) {
+            return false;
+        }
+    }
 }

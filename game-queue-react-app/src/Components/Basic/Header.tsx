@@ -15,7 +15,7 @@ export const HeaderComponent: FC = () => {
     const dispatch = useDispatch();
 
     function logOut() {
-        COOKIES.remove(TOKEN_COOKIE);
+        COOKIES.remove(TOKEN_COOKIE, { sameSite: true, secure: true });
         dispatch(setAuth(null));
     }
 
