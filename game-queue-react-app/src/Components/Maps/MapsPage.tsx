@@ -57,7 +57,7 @@ export const MapsPageComponent: FC = () => {
                 </span>
             </div>
         ) : (
-            <MapListComponent maps={maps} />
+            <MapListComponent maps={maps} showButtons={true} />
         );
     return (
         <div className="container" style={{ display: 'flex' }}>

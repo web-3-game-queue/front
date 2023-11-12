@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { reset, useAuth } from '../../Core/Storage/DataSlice';
+import { reset, setCurrentRequestId, setMapIds, useAuth } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { COOKIES } from '../../Core/Cookies';
 import { TOKEN_COOKIE } from '../../Configuration';
 import { ShopcartComponent } from '../Shopcart';
 import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
+import { SearchMapsRequestAPI } from '../../Core/APIs/SearchMapsRequestAPI';
 
 export const HeaderComponent: FC = () => {
     const auth = useAuth();
@@ -32,6 +33,11 @@ export const HeaderComponent: FC = () => {
             }
             const isAdm = await AuthenticationAPI.IsAdmin();
             setIsAdm(isAdm);
+            const currentRequest = await SearchMapsRequestAPI.GetCurrent();
+            const currentRequestId = currentRequest?.id ?? null;
+            dispatch(setCurrentRequestId(currentRequestId));
+            const mapIds = currentRequest?.maps?.map((x) => x.id!) ?? [];
+            dispatch(setMapIds(mapIds));
         }
         checkIfLogged();
     });

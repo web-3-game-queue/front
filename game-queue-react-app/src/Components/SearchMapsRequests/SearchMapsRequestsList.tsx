@@ -5,16 +5,20 @@ import { SearchMapsRequestAPI } from '../../Core/APIs/SearchMapsRequestAPI';
 import { useAuth } from '../../Core/Storage/DataSlice';
 import { useNavigate } from 'react-router-dom';
 import { SearchMapsRequestRowComponent } from './SearchMapsRequestRow';
+import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
 
 export const SearchMapsRequestListComponent: FC = () => {
     const [requests, setRequests] = useState<SearchMapsRequest[] | null>(null);
     const auth = useAuth();
     const navigate = useNavigate();
+    const [isMod, setIsMod] = useState(false);
 
     useEffect(() => {
         async function loadData() {
             const requests = await SearchMapsRequestAPI.GetRequests();
             setRequests(requests);
+            const isMod = await AuthenticationAPI.IsMod();
+            setIsMod(isMod);
         }
 
         loadData();
@@ -43,7 +47,7 @@ export const SearchMapsRequestListComponent: FC = () => {
                 </thead>
                 <tbody>
                     {requests.map((r) => (
-                        <SearchMapsRequestRowComponent searchMapsRequest={r} />
+                        <SearchMapsRequestRowComponent searchMapsRequest={r} isMod={isMod} />
                     ))}
                 </tbody>
             </table>

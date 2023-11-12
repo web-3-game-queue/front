@@ -25,26 +25,63 @@ function searchMapsRequestStatusToBgClass(searchMapsRequestStatus?: SearchMapsRe
 
 interface SearchMapsRequestRowComponentProps {
     searchMapsRequest: SearchMapsRequest;
+    isMod: boolean;
 }
 
-export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProps> = ({ searchMapsRequest }) => {
+export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProps> = ({ searchMapsRequest, isMod }) => {
     const [verboseRequest, setVerboseRequest] = useState<SearchMapsRequestVerbose | null>(null);
+
+    const [status, setStatus] = useState(searchMapsRequest.status);
 
     async function onOpenMaps() {
         const verboseRequest = await SearchMapsRequestAPI.GetRequest(searchMapsRequest.id!);
         setVerboseRequest(verboseRequest);
     }
 
-    const bgColor = searchMapsRequestStatusToBgClass(searchMapsRequest.status);
+    async function setNewStatus(newStatus: SearchMapsRequestStatus) {
+        try {
+            await SearchMapsRequestAPI.SetStatus(searchMapsRequest.id!, newStatus);
+            setStatus(newStatus);
+        } catch (_) {
+            console.error('Error setting new status');
+        }
+    }
+
+    const bgColor = searchMapsRequestStatusToBgClass(status);
 
     const mapsSubList = verboseRequest == null ? <LoadingIndicator /> : <MapsSubListComponent maps={verboseRequest.maps!} />;
+
+    const statusText = SearchMapsRequestStatusToString(status);
+
+    const statusDisplay =
+        isMod && status == SearchMapsRequestStatus.Composed ? (
+            <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {statusText}
+                </button>
+                <ul className="dropdown-menu">
+                    <li className="bg-danger-subtle">
+                        <a className="dropdown-item" href="#" onClick={() => setNewStatus(SearchMapsRequestStatus.Cancelled)}>
+                            Отменить
+                        </a>
+                    </li>
+                    <li className="bg-success-subtle">
+                        <a className="dropdown-item" href="#" onClick={() => setNewStatus(SearchMapsRequestStatus.Done)}>
+                            Завершить
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        ) : (
+            statusText
+        );
 
     return (
         <tr key={searchMapsRequest.id}>
             <th className={bgColor} scope="row">
                 <span className="badge text-bg-dark">{searchMapsRequest.id}</span>
             </th>
-            <td className={bgColor}>{SearchMapsRequestStatusToString(searchMapsRequest.status)}</td>
+            <td className={bgColor}>{statusDisplay}</td>
             <td className={bgColor}>{searchMapsRequest.creationDate}</td>
             <td className={bgColor}>{searchMapsRequest.composeDate ?? <span className="text-body-secondary">—</span>}</td>
             <td className={bgColor}>{searchMapsRequest.doneDate ?? <span className="text-body-secondary">—</span>}</td>
