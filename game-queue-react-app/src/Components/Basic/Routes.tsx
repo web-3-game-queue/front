@@ -7,7 +7,7 @@ import { LoginComponent } from '../Auth/Login';
 import { RegisterComponent } from '../Auth/Register';
 import { TestComponent } from '../Test';
 import { CartComponent } from '../Cart/Cart';
-import { MapEditPageParamIdComponent } from '../Maps/MapEditPage/MapEditPageParamId';
+import { MapEditPageParamIdComponent } from '../Maps/MapEdit/MapEditPageParamId';
 
 export const RoutesComponent: FC = () => (
     <Routes>

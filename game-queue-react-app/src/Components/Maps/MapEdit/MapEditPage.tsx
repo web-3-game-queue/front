@@ -8,6 +8,7 @@ import { MapAPI } from '../../../Core/APIs/MapAPI';
 import { StaticDataAPI } from '../../../Core/APIs/StaticDataAPI';
 import { useDispatch } from 'react-redux';
 import { SearchMapsRequestAPI } from '../../../Core/APIs/SearchMapsRequestAPI';
+import { Utils } from '../../../Core/Utils';
 
 interface MapEditPageProps {
     mapId: number;
@@ -19,6 +20,8 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
     const [map, setMap] = useState<Map | null | undefined>(undefined);
     const [update, setUpdate] = useState(true);
     const dispatch = useDispatch();
+
+    const [cardBg, setCardBg] = useState('');
 
     const nameInput = useRef<HTMLInputElement>(null);
     const widthInput = useRef<HTMLInputElement>(null);
@@ -59,6 +62,10 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
         }
 
         setUpdate(true);
+
+        setCardBg('bg-success-subtle');
+        await Utils.Sleep(500);
+        setCardBg('');
     }
 
     useEffect(() => {
@@ -100,7 +107,7 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
         <div className="card" key={map.id}>
             <h3>Редактирование карты "{map.name}"</h3>
             <div className="card-body">
-                <form className="card p-2 m-3 needs-validation" style={{ width: '250px', display: 'inline-block' }} onSubmit={handleSubmit}>
+                <form className={`card p-2 m-3 needs-validation ${cardBg}`} style={{ width: '250px', display: 'inline-block' }} onSubmit={handleSubmit}>
                     <div
                         style={{
                             height: '5rem',
