@@ -103,7 +103,7 @@ export const MapAddPageComponent: FC = () => {
                 <form className={`card p-2 m-3 needs-validation ${cardBg}`} style={{ width: '250px', display: 'inline-block' }} onSubmit={handleSubmit}>
                     <div
                         style={{
-                            height: '5rem',
+                            height: '10rem',
                             position: 'relative'
                         }}
                     >
