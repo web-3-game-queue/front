@@ -42,7 +42,7 @@ export const SearchMapsRequestListComponent: FC = () => {
                 const requests = await SearchMapsRequestAPI.GetRequests();
                 setRequests(requests);
             }
-        }, 1000);
+        }, 5000);
         return () => {
             clearInterval(interval);
         };
