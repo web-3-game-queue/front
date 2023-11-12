@@ -80,7 +80,9 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     );
 
     const addButton =
-        auth === null ? null : added ? (
+        auth === null ? null : map?.mapStatus == MapStatus.Deleted ? (
+            <h5>Недоступна.</h5>
+        ) : added ? (
             <button className="btn btn-warning m-1" onClick={onRemoveAdd}>
                 Снять выбор
             </button>
@@ -103,7 +105,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         </Link>
     ) : null;
 
-    const buttons = [backButton, addButton, deleteButton !== null ? null : null, editButton]
+    const buttons = [addButton, deleteButton !== null ? null : null, editButton]
         .filter((x) => x != null)
         .flatMap((x) => [x, <br />])
         .slice(0, -1)
@@ -115,7 +117,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         return <LoadingIndicator />;
     }
     const coverImageUrl = StaticDataAPI.FormMapCoverUrl(map);
-    const controls = map.mapStatus == MapStatus.Deleted ? <h5>Недоступна.</h5> : <div>{buttons}</div>;
+    const controls = <div>{buttons}</div>;
     const description = map.description ? <span>{map.description}</span> : <span className="text-body-secondary">Описание отсутствует</span>;
     return (
         <div className="card" key={map.id}>
@@ -151,6 +153,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
                 {description}
                 {controls}
             </div>
+            {backButton}
         </div>
     );
 };

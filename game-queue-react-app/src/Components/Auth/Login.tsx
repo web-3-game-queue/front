@@ -38,7 +38,7 @@ export const LoginComponent: FC = () => {
                 dispatch(setCurrentRequestId(currentRequest.id!));
                 dispatch(setMapIds(currentRequest.maps!.map((x) => x.id!)));
             }
-            navigate('/');
+            navigate(-1);
         }
     }
 

@@ -49,6 +49,8 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
             coverImageUrl: map?.coverImageUrl
         };
 
+        await MapAPI.UpdateMap(newMap, image);
+
         const currentRequest = await SearchMapsRequestAPI.GetCurrent();
         if (currentRequest === null) {
             dispatch(setMapIds([]));
@@ -56,7 +58,6 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
             dispatch(setMapIds(currentRequest.maps!.map((x) => x.id!)));
         }
 
-        await MapAPI.UpdateMap(newMap, image);
         setUpdate(true);
     }
 
@@ -75,6 +76,16 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
             loadData();
         }
     }, [auth, mapId, navigate, update]);
+
+    const onClickBack = () => {
+        navigate(-1);
+    };
+
+    const backButton = (
+        <button className="btn btn-secondary" onClick={onClickBack}>
+            Назад
+        </button>
+    );
 
     if (map === undefined) {
         return <LoadingIndicator />;
@@ -164,6 +175,7 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
                 </form>
                 {/* {controls} */}
             </div>
+            {backButton}
         </div>
     );
 };
