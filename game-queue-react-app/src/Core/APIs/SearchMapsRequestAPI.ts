@@ -27,6 +27,26 @@ export abstract class SearchMapsRequestAPI {
         }
     }
 
+    public static GetAllRequests = async (beginDate?: Date, endDate?: Date, username?: string) => {
+        try {
+            const url = new URL(`${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/all`);
+            if (beginDate) {
+                url.searchParams.append('begin_date', beginDate.toISOString());
+            }
+            if (endDate) {
+                url.searchParams.append('end_date', endDate.toISOString());
+            }
+            if (username) {
+                url.searchParams.append('username', username);
+            }
+            const result = await axios.get(url.toString());
+            const requests: SearchMapsRequest[] = result.data;
+            return requests;
+        } catch (error) {
+            return null;
+        }
+    }
+
     public static GetCurrent = async () => {
         const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/current`;
         try {
