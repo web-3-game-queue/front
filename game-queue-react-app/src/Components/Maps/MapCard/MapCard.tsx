@@ -41,7 +41,6 @@ export const MapCardComponent: FC<MapCardComponentProps> = ({ map, added }) => {
         );
 
     const bgColor = map.mapStatus === MapStatus.Available ? '' : 'bg-danger-subtle';
-    console.log('bgColor :>> ', bgColor);
 
     return (
         <div className="col mb-3 mb-sm-0 p-0 p-xl-3" key={map.id}>

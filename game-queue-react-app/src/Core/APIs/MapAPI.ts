@@ -42,15 +42,14 @@ export abstract class MapAPI {
 
     public static UpdateMap = async (map: Map, coverImageFile: File | null) => {
         const url = `${BASE_API_URL}/${this.MAP_API_PATH}/${map.id!}`;
-        console.log('Updating map:', map);
+
         const form = new FormData();
         form.append('name', map.name!);
         form.append('width', map.width!.toString());
         form.append('height', map.height!.toString());
         form.append('maxPlayersCount', map.maxPlayersCount!.toString());
         form.append('description', map.description!);
-        form.append('mapStatus', map.mapStatus!.toString());
-        if(map.mapStatus! === MapStatus.Available) {
+        if (map.mapStatus! === MapStatus.Available) {
             await this.MarkAsAvilable(map.id!);
         } else if (map.mapStatus! === MapStatus.Deleted) {
             await this.DeleteMap(map.id!);
@@ -60,5 +59,22 @@ export abstract class MapAPI {
         }
 
         await axios.put(url, form);
+    }
+
+    public static CreateMap = async (map: Map, coverImage: { file: File, url: string } | null = null) => {
+        const url = `${BASE_API_URL}/${this.MAP_API_PATH}`;
+        const form = new FormData();
+        form.append('name', map.name!);
+        form.append('width', map.width!.toString());
+        form.append('height', map.height!.toString());
+        form.append('maxPlayersCount', map.maxPlayersCount!.toString());
+        form.append('description', map.description!);
+
+        if (coverImage != null) {
+            form.append('coverImageUrl', coverImage.url);
+            form.append('coverImageFile', coverImage.file);
+        }
+
+        await axios.post(url, form);
     }
 }

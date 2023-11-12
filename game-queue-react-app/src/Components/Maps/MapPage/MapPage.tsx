@@ -80,7 +80,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     );
 
     const addButton =
-        auth === null ? null : map?.mapStatus == MapStatus.Deleted ? (
+        auth === null ? null : map?.mapStatus != MapStatus.Available ? (
             <h5>Недоступна.</h5>
         ) : added ? (
             <button className="btn btn-warning m-1" onClick={onRemoveAdd}>
@@ -100,7 +100,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         ) : null;
 
     const editButton = isAdm ? (
-        <Link className="btn btn-outline-info m-1" to="./edit">
+        <Link className="btn btn-warning m-1" to="./edit">
             Редактировать
         </Link>
     ) : null;
@@ -119,8 +119,11 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     const coverImageUrl = StaticDataAPI.FormMapCoverUrl(map);
     const controls = <div>{buttons}</div>;
     const description = map.description ? <span>{map.description}</span> : <span className="text-body-secondary">Описание отсутствует</span>;
+
+    const bgColor = map.mapStatus === MapStatus.Available ? '' : 'bg-danger-subtle';
+
     return (
-        <div className="card" key={map.id}>
+        <div className={`card ${bgColor}`} key={map.id}>
             <div className="card-body">
                 <div
                     style={{

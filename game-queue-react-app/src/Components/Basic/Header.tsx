@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { reset, useAuth } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
@@ -12,6 +12,8 @@ export const HeaderComponent: FC = () => {
     const location = useLocation();
     const paths = location.pathname.split('/').filter((x) => x !== '');
     const lastPath = paths.splice(paths.length - 1);
+
+    const [isAdm, setIsAdm] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -28,6 +30,8 @@ export const HeaderComponent: FC = () => {
                 console.error('Error logging');
                 logOut();
             }
+            const isAdm = await AuthenticationAPI.IsAdmin();
+            setIsAdm(isAdm);
         }
         checkIfLogged();
     });
@@ -52,15 +56,23 @@ export const HeaderComponent: FC = () => {
         );
 
     const cartLink =
-        auth === null ? (
-            <></>
-        ) : (
+        auth != null ? (
             <li className="nav-item">
                 <Link className="nav-link text-dark" to="./cart">
                     Выбранные карты
                 </Link>
             </li>
+        ) : (
+            <></>
         );
+
+    const addMapLink = isAdm ? (
+        <li className="nav-item">
+            <Link className="nav-link text-dark" to="/maps/create">
+                Создать карту
+            </Link>
+        </li>
+    ) : null;
 
     return (
         <header>
@@ -100,6 +112,7 @@ export const HeaderComponent: FC = () => {
                                 </Link>
                             </li>
                             {cartLink}
+                            {addMapLink}
                         </ul>
                     </div>
                 </div>
