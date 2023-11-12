@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { reset, useAuth } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { COOKIES } from '../../Core/Cookies';
 import { TOKEN_COOKIE } from '../../Configuration';
 import { ShopcartComponent } from '../Shopcart';
+import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
 
 export const HeaderComponent: FC = () => {
     const auth = useAuth();
@@ -18,6 +19,18 @@ export const HeaderComponent: FC = () => {
         COOKIES.remove(TOKEN_COOKIE, { sameSite: true, secure: true });
         dispatch(reset());
     }
+
+    useEffect(() => {
+        async function checkIfLogged() {
+            try {
+                await AuthenticationAPI.GetMe();
+            } catch (error) {
+                console.error('Error logging:', error);
+                logOut();
+            }
+        }
+        checkIfLogged();
+    });
 
     const loginDisplay =
         auth === null ? (
