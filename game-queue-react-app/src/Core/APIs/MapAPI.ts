@@ -33,4 +33,18 @@ export abstract class MapAPI {
         await axios.delete(url);
         console.log('Marked as deleted map with id', mapId);
     }
+
+    public static UpdateMap = async (map: Map) => {
+        const url = `${BASE_API_URL}/${this.MAP_API_PATH}/${map.id!}`;
+        console.log('Updating map:', map);
+        const form = new FormData();
+        form.append('name', map.name!);
+        form.append('width', map.width!.toString());
+        form.append('height', map.height!.toString());
+        form.append('maxPlayersCount', map.maxPlayersCount!.toString());
+        form.append('description', map.description!);
+        form.append('mapStatus', map.mapStatus!.toString());
+
+        await axios.put(url, form);
+    }
 }

@@ -7,6 +7,7 @@ import { LoginComponent } from '../Auth/Login';
 import { RegisterComponent } from '../Auth/Register';
 import { TestComponent } from '../Test';
 import { CartComponent } from '../Cart/Cart';
+import { MapEditPageParamIdComponent } from '../Maps/MapEditPage/MapEditPageParamId';
 
 export const RoutesComponent: FC = () => (
     <Routes>
@@ -18,5 +19,6 @@ export const RoutesComponent: FC = () => (
         <Route path="/register" element={<RegisterComponent />} />
         <Route path="/cart" element={<CartComponent />} />
         <Route path="/test" element={<TestComponent />} />
+        <Route path="/maps/:id/edit" element={<MapEditPageParamIdComponent />} />
     </Routes>
 );

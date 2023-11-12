@@ -26,13 +26,16 @@ export abstract class AuthenticationAPI {
     }
 
     private static readonly MOD_ROLES = ['Moderator', 'Administrator'];
-    public static IsMod = async () => {
+    public static IsMod = async () => await this.HasClaim(this.MOD_ROLES);
+
+    private static readonly ADMIN_ROLES = ['Administrator'];
+    public static IsAdmin = async () => await this.HasClaim(this.ADMIN_ROLES);
+
+    public static HasClaim = async (claimSpellings: string[]) => {
         try {
             const me = await this.GetMe();
-            for (const mod_role of this.MOD_ROLES) {
-                if (me.claims?.indexOf(mod_role) != -1) {
-                    console.log('me :>> ', me);
-                    console.log('mod_role :>> ', mod_role);
+            for (const claim of claimSpellings) {
+                if (me.claims?.indexOf(claim) != -1) {
                     return true;
                 }
             }

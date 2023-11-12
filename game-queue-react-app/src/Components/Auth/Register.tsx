@@ -57,13 +57,13 @@ export const RegisterComponent: FC = () => {
                     <label htmlFor="Password" className="form-label">
                         Пароль
                     </label>
-                    <input type="password" className="form-control" id="Password" name="Password" min="0" ref={passwordInput} required />
+                    <input type="password" className="form-control" id="Password" name="Password" ref={passwordInput} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="RepeatPassword" className="form-label">
                         Повторите пароль
                     </label>
-                    <input type="password" className="form-control" id="RepeatPassword" name="RepeatPassword" min="0" ref={repeatPasswordInput} required />
+                    <input type="password" className="form-control" id="RepeatPassword" name="RepeatPassword" ref={repeatPasswordInput} required />
                 </div>
                 <button type="submit" className="btn btn-primary">
                     Зарегистрироваться

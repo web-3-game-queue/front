@@ -58,7 +58,7 @@ export const LoginComponent: FC = () => {
                     <label htmlFor="Password" className="form-label">
                         Пароль
                     </label>
-                    <input type="password" className="form-control" id="Password" name="Password" min="0" ref={passwordInput} required />
+                    <input type="password" className="form-control" id="Password" name="Password" ref={passwordInput} required />
                 </div>
                 <button type="submit" className="btn btn-primary">
                     Войти
