@@ -44,7 +44,6 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
             const gotMap = await MapAPI.GetMap(id);
             if (auth !== null) {
                 const currentRequest = await SearchMapsRequestAPI.GetCurrent();
-                console.log('currentRequest :>> ', currentRequest);
                 if (currentRequest !== null) {
                     setAdded(currentRequest?.maps?.findIndex((m) => m.id == id) != -1);
                 } else {
@@ -104,7 +103,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         </Link>
     ) : null;
 
-    const buttons = [backButton, addButton, deleteButton, editButton]
+    const buttons = [backButton, addButton, deleteButton !== null ? null : null, editButton]
         .filter((x) => x != null)
         .flatMap((x) => [x, <br />])
         .slice(0, -1)
