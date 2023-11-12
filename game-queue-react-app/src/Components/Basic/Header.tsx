@@ -25,7 +25,7 @@ export const HeaderComponent: FC = () => {
             try {
                 await AuthenticationAPI.GetMe();
             } catch (error) {
-                console.error('Error logging:', error);
+                console.error('Error logging');
                 logOut();
             }
         }

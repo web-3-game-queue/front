@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { addMapId, removeMapId, setCurrentRequestId, useAuth } from '../../../Core/Storage/DataSlice';
 import { AuthenticationAPI } from '../../../Core/APIs/AuthenticationAPI';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface MapPageComponentProps {
     id: number;
@@ -18,6 +19,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
     const [needsUpdate, setNeedsUpdate] = useState(true);
     const [added, setAdded] = useState<boolean>(false);
     const [isMod, setIsMod] = useState<boolean>(false);
+    const [isAdm, setIsAdm] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -42,10 +44,17 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
             const gotMap = await MapAPI.GetMap(id);
             if (auth !== null) {
                 const currentRequest = await SearchMapsRequestAPI.GetCurrent();
-                setAdded(currentRequest?.maps?.findIndex((m) => m.id == id) != -1);
+                console.log('currentRequest :>> ', currentRequest);
+                if (currentRequest !== null) {
+                    setAdded(currentRequest?.maps?.findIndex((m) => m.id == id) != -1);
+                } else {
+                    setAdded(false);
+                }
             }
             const isMod = await AuthenticationAPI.IsMod();
             setIsMod(isMod);
+            const isAdm = await AuthenticationAPI.IsAdmin();
+            setIsAdm(isAdm);
             setMap(gotMap);
         }
         if (needsUpdate) {
@@ -82,16 +91,24 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
             </button>
         );
 
-    const deleteButton = isMod ? (
-        <button className="btn btn-danger" onClick={onClickDelete}>
-            Удалить
-        </button>
+    const deleteButton =
+        isMod || isAdm ? (
+            <button className="btn btn-danger m-1" onClick={onClickDelete}>
+                Удалить
+            </button>
+        ) : null;
+
+    const editButton = isAdm ? (
+        <Link className="btn btn-outline-info m-1" to="./edit">
+            Редактировать
+        </Link>
     ) : null;
 
-    const buttons = [backButton, addButton, deleteButton]
+    const buttons = [backButton, addButton, deleteButton, editButton]
         .filter((x) => x != null)
         .flatMap((x) => [x, <br />])
-        .slice(0, -1);
+        .slice(0, -1)
+        .map((x, i) => <span key={i}>{x}</span>);
 
     if (map === null) {
         return <h2>Карта с номером #{id} не найдена</h2>;

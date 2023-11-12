@@ -32,6 +32,7 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
         const height = heightInput.current ? parseInt(heightInput.current.value) : 0;
         const maxPlayersCount = maxPlayersCountInput.current ? parseInt(maxPlayersCountInput.current.value) : 0;
         const description = descriptionInput.current?.value ?? '';
+        const image = imageInput.current?.files?.item(0) ?? null;
         const isAvailable = isAvailableInput.current?.checked ?? false;
 
         const newMap: Map = {
@@ -45,7 +46,7 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
             coverImageUrl: map?.coverImageUrl
         };
 
-        await MapAPI.UpdateMap(newMap);
+        await MapAPI.UpdateMap(newMap, image);
         setUpdate(true);
     }
 
@@ -59,7 +60,7 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
             setMap(gotMap);
         }
 
-        if(update) {
+        if (update) {
             setUpdate(false);
             loadData();
         }
@@ -75,7 +76,7 @@ export const MapEditPageComponent: FC<MapEditPageProps> = ({ mapId }) => {
 
     const coverImageUrl = StaticDataAPI.FormMapCoverUrl(map);
     return (
-        <div className="card" key={map.id} style={{ textAlign: 'start' }}>
+        <div className="card" key={map.id}>
             <h3>Редактирование карты "{map.name}"</h3>
             <div className="card-body">
                 <form className="card p-2 m-3 needs-validation" style={{ width: '250px', display: 'inline-block' }} onSubmit={handleSubmit}>
