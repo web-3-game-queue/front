@@ -15,6 +15,8 @@ export const ShopcartComponent: FC = () => {
             if (currentRequestId !== null) {
                 const request = await SearchMapsRequestAPI.GetRequest(currentRequestId);
                 setRequest(request);
+            } else {
+                setRequest(null);
             }
         }
         getRequests();
