@@ -12,6 +12,7 @@ export const CartComponent: FC = () => {
     const navigate = useNavigate();
     const [currentRequest, setCurrentRequest] = useState<SearchMapsRequestVerbose | null>(null);
     const currentRequestId = useCurrentRequestId();
+    const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,6 +22,7 @@ export const CartComponent: FC = () => {
         async function getMaps() {
             const request = await SearchMapsRequestAPI.GetCurrent();
             setCurrentRequest(request);
+            setLoaded(true);
         }
         getMaps();
     }, [auth, navigate, currentRequestId]);
@@ -45,11 +47,11 @@ export const CartComponent: FC = () => {
         }
     }
 
-    if (currentRequest === null) {
+    if (loaded === null) {
         return <LoadingIndicator />;
     }
     const mapsDisplay =
-        currentRequest.maps!.length == 0 ? (
+        currentRequest == null || currentRequest.maps!.length == 0 ? (
             <div
                 className="container"
                 style={{

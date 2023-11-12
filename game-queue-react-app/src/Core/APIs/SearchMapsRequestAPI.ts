@@ -20,6 +20,9 @@ export abstract class SearchMapsRequestAPI {
         const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/current`;
         try {
             const result = await axios.get(url);
+            if(result.status != 200) {
+                return null;
+            }
             const searchMapRequestVerbose: SearchMapsRequestVerbose = result.data;
             return searchMapRequestVerbose;
         } catch (error) {
