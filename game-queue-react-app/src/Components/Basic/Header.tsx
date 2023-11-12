@@ -66,6 +66,17 @@ export const HeaderComponent: FC = () => {
             <></>
         );
 
+    const requestsLink =
+        auth != null ? (
+            <li className="nav-item">
+                <Link className="nav-link text-dark" to="/requests">
+                    Список заявок
+                </Link>
+            </li>
+        ) : (
+            <></>
+        );
+
     const addMapLink = isAdm ? (
         <li className="nav-item">
             <Link className="nav-link text-dark" to="/maps/create">
@@ -112,6 +123,7 @@ export const HeaderComponent: FC = () => {
                                 </Link>
                             </li>
                             {cartLink}
+                            {requestsLink}
                             {addMapLink}
                         </ul>
                     </div>

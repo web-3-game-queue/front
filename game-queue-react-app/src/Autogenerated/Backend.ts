@@ -93,7 +93,7 @@ export interface User {
     level?: number;
     role?: UserRole;
     claims?: string[] | null;
-  }
+}
 
 export enum UserRole {
     Client = "Client",
@@ -103,3 +103,21 @@ export enum UserRole {
 
 export const MapToString = (map: Map) =>
     `${map.name} ${map.width}x${map.height} (${map.maxPlayersCount}p)`;
+
+export const SearchMapsRequestStatusToString = (searchMapsRequestStatus?: SearchMapsRequestStatus) => {
+    switch (searchMapsRequestStatus) {
+        case SearchMapsRequestStatus.Draft:
+            return 'Черновик';
+        case SearchMapsRequestStatus.Cancelled:
+            return 'Отменено';
+        case SearchMapsRequestStatus.Composed:
+            return 'Сформировано';
+        case SearchMapsRequestStatus.Deleted:
+            return 'Удалено';
+        case SearchMapsRequestStatus.Done:
+            return 'Завершено';
+
+        default:
+            return '[ДАННЫЕ ███████]';
+    }
+}
