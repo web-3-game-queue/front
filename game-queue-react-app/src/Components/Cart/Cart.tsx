@@ -83,7 +83,7 @@ export const CartComponent: FC = () => {
                         Удалить заявку
                     </button>
                 </div>
-                <MapListComponent maps={currentRequest.maps!} />
+                <MapListComponent maps={currentRequest.maps!} showButtons={true} />
             </>
         );
     return (

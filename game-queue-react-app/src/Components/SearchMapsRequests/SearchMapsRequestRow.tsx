@@ -3,6 +3,7 @@ import { SearchMapsRequest, SearchMapsRequestStatus, SearchMapsRequestStatusToSt
 import { SearchMapsRequestAPI } from '../../Core/APIs/SearchMapsRequestAPI';
 import { LoadingIndicator } from '../UI/LoadingIndicator';
 import { MapsSubListComponent } from './MapsSubList';
+import { Link } from 'react-router-dom';
 
 function searchMapsRequestStatusToBgClass(searchMapsRequestStatus?: SearchMapsRequestStatus) {
     switch (searchMapsRequestStatus) {
@@ -41,7 +42,7 @@ export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProp
     return (
         <tr key={searchMapsRequest.id}>
             <th className={bgColor} scope="row">
-                {searchMapsRequest.id}
+                <span className="badge text-bg-dark">{searchMapsRequest.id}</span>
             </th>
             <td className={bgColor}>{SearchMapsRequestStatusToString(searchMapsRequest.status)}</td>
             <td className={bgColor}>{searchMapsRequest.creationDate}</td>
@@ -52,7 +53,7 @@ export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProp
                     <div className="accordion-item">
                         <h2 className="accordion-header">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${searchMapsRequest.id}`} aria-expanded="true" onClick={onOpenMaps}>
-                                Открыть ({searchMapsRequest.mapsCount})
+                                Открыть список ({searchMapsRequest.mapsCount})
                             </button>
                         </h2>
                         <div id={`collapse${searchMapsRequest.id}`} className="accordion-collapse collapse" data-bs-parent="#mapsAccordion">
@@ -60,6 +61,11 @@ export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProp
                         </div>
                     </div>
                 </div>
+            </td>
+            <td className={bgColor}>
+                <Link className="btn btn-primary" to={`./${searchMapsRequest.id}`}>
+                    Открыть
+                </Link>
             </td>
         </tr>
     );

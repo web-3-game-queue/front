@@ -9,9 +9,10 @@ import { useDispatch } from 'react-redux';
 interface MapCardComponentProps {
     map: Map;
     added: boolean;
+    showButtons: boolean;
 }
 
-export const MapCardComponent: FC<MapCardComponentProps> = ({ map, added }) => {
+export const MapCardComponent: FC<MapCardComponentProps> = ({ map, added, showButtons }) => {
     const coverImageUrl = StaticDataAPI.FormMapCoverUrl(map);
     const auth = useAuth();
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export const MapCardComponent: FC<MapCardComponentProps> = ({ map, added }) => {
     }
 
     const addButton =
-        auth === null || map.mapStatus !== MapStatus.Available ? (
+        !showButtons || auth === null || map.mapStatus !== MapStatus.Available ? (
             <></>
         ) : added ? (
             <button className="btn btn-warning m-1" onClick={onRemoveAdd}>

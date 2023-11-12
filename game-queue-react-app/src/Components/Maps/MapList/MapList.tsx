@@ -7,9 +7,10 @@ import { LoadingIndicator } from '../../UI/LoadingIndicator';
 
 interface MapListProps {
     maps: Map[];
+    showButtons: boolean;
 }
 
-export const MapListComponent: FC<MapListProps> = ({ maps }: MapListProps) => {
+export const MapListComponent: FC<MapListProps> = ({ maps, showButtons }: MapListProps) => {
     const currentRequestId = useCurrentRequestId();
     const [selectedMapIds, setSelectedMapIds] = useState<number[] | null>(null);
     const mapIds = useMapIds();
@@ -42,7 +43,7 @@ export const MapListComponent: FC<MapListProps> = ({ maps }: MapListProps) => {
                 <h5 className="p-0">Карты:</h5>
                 <div className="row row-cols-3">
                     {maps.map((m) => (
-                        <MapCardComponent map={m} added={selectedMapIds.findIndex((id) => id == m.id) != -1} key={m.id} />
+                        <MapCardComponent map={m} added={selectedMapIds.findIndex((id) => id == m.id) != -1} key={m.id} showButtons={showButtons} />
                     ))}
                 </div>
             </div>

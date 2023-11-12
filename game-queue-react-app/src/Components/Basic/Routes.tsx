@@ -9,7 +9,8 @@ import { TestComponent } from '../Test';
 import { CartComponent } from '../Cart/Cart';
 import { MapEditPageParamIdComponent } from '../Maps/MapEdit/MapEditPageParamId';
 import { MapAddPageComponent } from '../Maps/MapAdd/MapAddPage';
-import { SearchMapsRequestListComponent } from '../SearchMapsRequest/SearchMapsRequestsList';
+import { SearchMapsRequestListComponent } from '../SearchMapsRequests/SearchMapsRequestsList';
+import { SearchMapsRequestPageParamIdComponent } from '../SearchMapsRequests/SearchMapsRequestPage/SearchMapsRequestPageParamId';
 
 export const RoutesComponent: FC = () => (
     <Routes>
@@ -24,5 +25,6 @@ export const RoutesComponent: FC = () => (
         <Route path="/maps/:id/edit" element={<MapEditPageParamIdComponent />} />
         <Route path="/maps/create" element={<MapAddPageComponent />} />
         <Route path="/requests" element={<SearchMapsRequestListComponent />} />
+        <Route path="/requests/:id" element={<SearchMapsRequestPageParamIdComponent />} />
     </Routes>
 );
