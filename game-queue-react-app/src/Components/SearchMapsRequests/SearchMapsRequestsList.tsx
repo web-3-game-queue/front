@@ -23,13 +23,6 @@ export const SearchMapsRequestListComponent: FC = () => {
 
     useEffect(() => {
         async function loadData() {
-            if (isMod) {
-                const requests = await SearchMapsRequestAPI.GetAllRequests(beginDate, endDate, username);
-                setRequests(requests);
-            } else {
-                const requests = await SearchMapsRequestAPI.GetRequests();
-                setRequests(requests);
-            }
             const checkIsMod = await AuthenticationAPI.IsMod();
             setIsMod(checkIsMod);
         }
@@ -38,7 +31,22 @@ export const SearchMapsRequestListComponent: FC = () => {
         if (auth === null) {
             navigate('/');
         }
-    }, [auth, navigate, isMod, beginDate, endDate, username]);
+    }, [auth, navigate]);
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            if (isMod) {
+                const requests = await SearchMapsRequestAPI.GetAllRequests(beginDate, endDate, username);
+                setRequests(requests);
+            } else {
+                const requests = await SearchMapsRequestAPI.GetRequests();
+                setRequests(requests);
+            }
+        }, 1000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isMod, beginDate, endDate, username]);
 
     function applyFilters(event: React.FormEvent) {
         event.preventDefault();
@@ -96,7 +104,7 @@ export const SearchMapsRequestListComponent: FC = () => {
                         <th scope="col">Список карт</th>
                     </tr>
                 </thead>
-                <tbody>{requests == null ? <LoadingIndicator /> : requests.map((r) => <SearchMapsRequestRowComponent searchMapsRequest={r} isMod={isMod} />)}</tbody>
+                <tbody>{requests == null ? <LoadingIndicator /> : requests.map((r) => <SearchMapsRequestRowComponent searchMapsRequest={r} isMod={isMod} key={r.id} />)}</tbody>
             </table>
         </div>
     );
