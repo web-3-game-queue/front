@@ -100,7 +100,7 @@ export const MapPageComponent: FC<MapPageComponentProps> = ({ id }: MapPageCompo
         ) : null;
 
     const editButton = isAdm ? (
-        <Link className="btn btn-warning m-1" to="./edit">
+        <Link className="btn btn-primary m-1" to="./edit">
             Редактировать
         </Link>
     ) : null;
