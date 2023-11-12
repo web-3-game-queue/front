@@ -35,7 +35,6 @@ export const MapListComponent: FC<MapListProps> = ({ maps, showButtons }: MapLis
     if (selectedMapIds === null) {
         return <LoadingIndicator />;
     }
-    console.log('currentRequestId :>> ', currentRequestId);
 
     return (
         <div className="container" style={{ display: 'flex' }}>

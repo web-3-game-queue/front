@@ -11,6 +11,7 @@ import { MapEditPageParamIdComponent } from '../Maps/MapEdit/MapEditPageParamId'
 import { MapAddPageComponent } from '../Maps/MapAdd/MapAddPage';
 import { SearchMapsRequestListComponent } from '../SearchMapsRequests/SearchMapsRequestsList';
 import { SearchMapsRequestPageParamIdComponent } from '../SearchMapsRequests/SearchMapsRequestPage/SearchMapsRequestPageParamId';
+import { MapsTableComponent } from '../Maps/MapsTable/MapsTable';
 
 export const RoutesComponent: FC = () => (
     <Routes>
@@ -26,5 +27,6 @@ export const RoutesComponent: FC = () => (
         <Route path="/maps/create" element={<MapAddPageComponent />} />
         <Route path="/requests" element={<SearchMapsRequestListComponent />} />
         <Route path="/requests/:id" element={<SearchMapsRequestPageParamIdComponent />} />
+        <Route path="/maps/table" element={<MapsTableComponent />} />
     </Routes>
 );

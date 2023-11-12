@@ -91,6 +91,14 @@ export const HeaderComponent: FC = () => {
         </li>
     ) : null;
 
+    const mapTableLink = isAdm ? (
+        <li className="nav-item">
+            <Link className="nav-link text-dark" to="/maps/table">
+                Таблица карт
+            </Link>
+        </li>
+    ) : null;
+
     return (
         <header>
             <nav className="navbar container" aria-label="breadcrumb">
@@ -131,6 +139,7 @@ export const HeaderComponent: FC = () => {
                             {cartLink}
                             {requestsLink}
                             {addMapLink}
+                            {mapTableLink}
                         </ul>
                     </div>
                 </div>
