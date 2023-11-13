@@ -71,7 +71,7 @@ export const SearchMapsRequestPageComponent: FC<SearchMapsRequestPageComponentPr
                         verticalAlign: 'middle'
                     }}
                 >
-                    <h3 className="text-body-secondary">Пусто. {request.creatorUser?.id == auth.selfId ? <Link to="/maps">Выбрать карты.</Link> : <></>}</h3>
+                    <h3 className="text-body-secondary">Пусто. {request.creatorUser?.id == auth.selfId && request.status == SearchMapsRequestStatus.Draft ? <Link to="/maps">Выбрать карты.</Link> : <></>}</h3>
                 </span>
             </div>
         ) : (

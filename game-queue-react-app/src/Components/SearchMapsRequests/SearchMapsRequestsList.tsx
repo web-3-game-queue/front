@@ -34,7 +34,7 @@ export const SearchMapsRequestListComponent: FC = () => {
     }, [auth, navigate]);
 
     useEffect(() => {
-        const interval = setInterval(async () => {
+        async function loadData() {
             if (isMod) {
                 const requests = await SearchMapsRequestAPI.GetAllRequests(beginDate, endDate, username);
                 setRequests(requests);
@@ -42,7 +42,14 @@ export const SearchMapsRequestListComponent: FC = () => {
                 const requests = await SearchMapsRequestAPI.GetRequests();
                 setRequests(requests);
             }
+        }
+
+        const interval = setInterval(async () => {
+            await loadData();
         }, 5000);
+
+        loadData();
+
         return () => {
             clearInterval(interval);
         };
