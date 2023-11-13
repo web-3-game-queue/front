@@ -75,7 +75,7 @@ export const SearchMapsRequestListComponent: FC = () => {
             <div id="BeginDate" className="input-group mb-3">
                 <input type="datetime-local" className="form-control" placeholder="Начальная дата" aria-label="BeginDate" ref={beginDateInput} />
                 <span className="input-group-text">—</span>
-                <input type="date" className="form-control" placeholder="Конечная дата" aria-label="EndDate" ref={endDateInput} />
+                <input type="datetime-local" className="form-control" placeholder="Конечная дата" aria-label="EndDate" ref={endDateInput} />
             </div>
 
             <div className="mb-3">
