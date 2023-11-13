@@ -26,7 +26,7 @@ export const MapsTableComponent: FC = () => {
 
     return (
         <div>
-            <h3>Список карт</h3>
+            <h3>Таблица карт</h3>
             <table className="table">
                 <thead>
                     <tr>

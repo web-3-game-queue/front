@@ -72,8 +72,7 @@ export const SearchMapsRequestListComponent: FC = () => {
         setRequests(null);
     }
 
-    // const filtersPanel = !isMod ? <>HELLO</> : <>WTF</>;
-    const filtersPanel = (
+    const filtersPanel = isMod ? (
         <form className="card card-body" onSubmit={applyFilters}>
             <h5>Фильтрация</h5>
             <label htmlFor="BeginDate" className="form-label">
@@ -93,6 +92,8 @@ export const SearchMapsRequestListComponent: FC = () => {
             </div>
             <button className="btn btn-primary">Применить</button>
         </form>
+    ) : (
+        <></>
     );
 
     return (
