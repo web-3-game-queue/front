@@ -24,8 +24,8 @@ export const IndexComponent: FC = () => {
 
     return (
         <>
-            Well, hello there
-            <br />
+            {/* Well, hello there
+            <br /> */}
             {invite}
         </>
     );
