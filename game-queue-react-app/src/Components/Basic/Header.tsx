@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { reset, setCurrentRequestId, setMapIds, useAuth } from '../../Core/Storage/DataSlice';
 import { useDispatch } from 'react-redux';
 import { COOKIES } from '../../Core/Cookies';
@@ -7,12 +7,10 @@ import { TOKEN_COOKIE } from '../../Configuration';
 import { ShopcartComponent } from '../Shopcart';
 import { AuthenticationAPI } from '../../Core/APIs/AuthenticationAPI';
 import { SearchMapsRequestAPI } from '../../Core/APIs/SearchMapsRequestAPI';
+import { BreadcrumbsComponent } from './Breadcrumbs/Breadcrumbs';
 
 export const HeaderComponent: FC = () => {
     const auth = useAuth();
-    const location = useLocation();
-    const paths = location.pathname.split('/').filter((x) => x !== '');
-    const lastPath = paths.splice(paths.length - 1);
 
     const [isAdm, setIsAdm] = useState(false);
 
@@ -102,19 +100,7 @@ export const HeaderComponent: FC = () => {
     return (
         <header>
             <nav className="navbar container" aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    <li className="breadcrumb-item active" aria-current="page" key="path-0">
-                        <Link to="/">Home</Link>
-                    </li>
-                    {paths.map((path, id) => (
-                        <li className="breadcrumb-item" aria-current="page" key={`path-${id}`}>
-                            <Link to={paths.slice(0, id + 1).join('/')}>{path}</Link>
-                        </li>
-                    ))}
-                    <li className="breadcrumb-item active" aria-current="page">
-                        {lastPath}
-                    </li>
-                </ol>
+                <BreadcrumbsComponent />
                 <div>
                     {loginDisplay}
                     <ShopcartComponent />
