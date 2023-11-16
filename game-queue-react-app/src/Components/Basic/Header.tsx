@@ -108,7 +108,7 @@ export const HeaderComponent: FC = () => {
                     </li>
                     {paths.map((path, id) => (
                         <li className="breadcrumb-item" aria-current="page" key={`path-${id}`}>
-                            <Link to={path}>{path}</Link>
+                            <Link to={paths.slice(0, id + 1).join('/')}>{path}</Link>
                         </li>
                     ))}
                     <li className="breadcrumb-item active" aria-current="page">
