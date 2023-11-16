@@ -10,6 +10,9 @@ export abstract class StaticDataAPI {
         `${BASE_API_URL}/${this.STATIC_DATA_API_PATH}/${filePath}`;
 
     public static FormMapCoverUrl = (map: Map) => {
+        if (map.mock) {
+            return map.coverImageUrl;
+        }
         const coverImagePath = map.coverImageUrl ?? MAP_COVER_PLACEHOLDER_FILENAME_PATH;
         return this.FormFileUrl(coverImagePath);
     }

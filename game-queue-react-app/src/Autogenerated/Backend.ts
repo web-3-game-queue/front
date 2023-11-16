@@ -39,6 +39,7 @@ export interface Map {
     coverImageUrl?: string | null;
     description?: string | null;
     mapStatus?: MapStatus;
+    mock?: boolean
 }
 
 export enum MapStatus {
