@@ -62,6 +62,8 @@ export interface SearchMapsRequest {
     doneDate?: string | null;
     /** @format int32 */
     mapsCount?: number;
+    /** @format int32 */
+    handledByUserId?: number;
 }
 
 export interface SearchMapsRequestVerbose {
@@ -75,6 +77,8 @@ export interface SearchMapsRequestVerbose {
     composeDate?: string | null;
     /** @format date-time */
     doneDate?: string | null;
+    /** @format int32 */
+    handledByUserId?: number;
     maps?: Map[] | null;
 }
 

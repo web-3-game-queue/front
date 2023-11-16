@@ -104,11 +104,12 @@ export const SearchMapsRequestListComponent: FC = () => {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        {isMod ? <th scope="col">Создатель</th> : <></>}
+                        {isMod ? <th scope="col">Создатель</th> : null}
                         <th scope="col">Статус</th>
-                        <th scope="col">Дата создания</th>
-                        <th scope="col">Дата формирования</th>
-                        <th scope="col">Дата завершения</th>
+                        <th scope="col">Создано</th>
+                        <th scope="col">Сформировано</th>
+                        <th scope="col">Завершено</th>
+                        {isMod ? <th scope="col">Обработал</th> : null}
                         <th scope="col">Список карт</th>
                     </tr>
                 </thead>

@@ -37,17 +37,24 @@ interface SearchMapsRequestRowComponentProps {
 export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProps> = ({ searchMapsRequest, isMod }) => {
     const [verboseRequest, setVerboseRequest] = useState<SearchMapsRequestVerbose | null>(null);
     const [creator, setCreator] = useState<User | null>(null);
+    const [handler, setHandler] = useState<User | null | undefined>(null);
 
     const [status, setStatus] = useState(searchMapsRequest.status);
 
     useEffect(() => {
-        async function loadCreator() {
+        async function loadData() {
             const creator = await UserAPI.GetUser(searchMapsRequest.creatorUserId!);
             setCreator(creator);
+            if (searchMapsRequest.handledByUserId) {
+                const handler = await UserAPI.GetUser(searchMapsRequest.handledByUserId);
+                setHandler(handler);
+            } else {
+                setHandler(undefined);
+            }
         }
 
         setCreator(null);
-        loadCreator();
+        loadData();
     }, [searchMapsRequest]);
 
     async function onOpenMaps() {
@@ -98,11 +105,12 @@ export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProp
             <th className={bgColor} scope="row">
                 <span className="badge text-bg-dark">{searchMapsRequest.id}</span>
             </th>
-            {isMod ? <td className={bgColor}>{creator ? creator.name : <LoadingIndicator />}</td> : <></>}
+            {isMod ? <td className={bgColor}>{creator ? creator.name : <LoadingIndicator />}</td> : null}
             <td className={bgColor}>{statusDisplay}</td>
             <td className={bgColor}>{formatDateString(searchMapsRequest.creationDate!)}</td>
             <td className={bgColor}>{searchMapsRequest.composeDate ? formatDateString(searchMapsRequest.composeDate) : <span className="text-body-secondary">—</span>}</td>
             <td className={bgColor}>{searchMapsRequest.doneDate ? formatDateString(searchMapsRequest.doneDate) : <span className="text-body-secondary">—</span>}</td>
+            {isMod ? <td className={bgColor}>{handler === undefined ? <span className="text-body-secondary">—</span> : handler ? handler.name : <LoadingIndicator />}</td> : null}
             <td className={bgColor}>
                 <div className="accordion" id="mapsAccordion">
                     <div className="accordion-item">
