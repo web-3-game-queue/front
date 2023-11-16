@@ -65,7 +65,7 @@ export const IndexComponent: FC = () => {
     }
 
     return (
-        <div style={{ textAlign: '-moz-center' }}>
+        <div style={{ justifyContent: 'center', display: 'flex' }}>
             <ul className="list-group" style={{ width: 'fit-content' }}>
                 <li className="list-group-item list-group-item-primary" aria-current="true">
                     Меню
