@@ -103,7 +103,7 @@ export abstract class SearchMapsRequestAPI {
     }
 
     public static CancelRequest = async (requestId: number) => {
-        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/cancel/${requestId}`;
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/status/${requestId}?status=Cancelled`;
         try {
             const result = await axios.put(url);
             return result.status == 200;
@@ -113,7 +113,7 @@ export abstract class SearchMapsRequestAPI {
     }
 
     public static FinishRequest = async (requestId: number) => {
-        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/finish/${requestId}`;
+        const url = `${BASE_API_URL}/${this.SEARCH_MAPS_REQUEST_API_PATH}/status/${requestId}?status=Finished`;
         try {
             const result = await axios.put(url);
             return result.status == 200;
