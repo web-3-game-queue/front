@@ -5,6 +5,7 @@ import { LoadingIndicator } from '../UI/LoadingIndicator';
 import { MapsSubListComponent } from './MapsSubList';
 import { Link } from 'react-router-dom';
 import { UserAPI } from '../../Core/APIs/UserAPI';
+import { useAuth } from '../../Core/Storage/DataSlice';
 
 function searchMapsRequestStatusToBgClass(searchMapsRequestStatus?: SearchMapsRequestStatus) {
     switch (searchMapsRequestStatus) {
@@ -38,6 +39,7 @@ export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProp
     const [verboseRequest, setVerboseRequest] = useState<SearchMapsRequestVerbose | null>(null);
     const [creator, setCreator] = useState<User | null>(null);
     const [handler, setHandler] = useState<User | null | undefined>(null);
+    const auth = useAuth();
 
     const [status, setStatus] = useState(searchMapsRequest.status);
 
@@ -126,7 +128,7 @@ export const SearchMapsRequestRowComponent: FC<SearchMapsRequestRowComponentProp
                 </div>
             </td>
             <td className={bgColor}>
-                <Link className="btn btn-primary" to={`./${searchMapsRequest.id}`}>
+                <Link className="btn btn-primary" to={searchMapsRequest.status == SearchMapsRequestStatus.Draft && searchMapsRequest.creatorUserId == auth?.selfId ? `/cart` : `./${searchMapsRequest.id}`}>
                     Открыть
                 </Link>
             </td>
