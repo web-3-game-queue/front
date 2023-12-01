@@ -77,7 +77,7 @@ export const CartComponent: FC = () => {
                         <h4>Заявка #{currentRequest.id!}</h4>
                     </div>
                     <button type="submit" className="btn btn-success" onClick={onCompose}>
-                        Сохранить заявку
+                        Сформировать
                     </button>
                     <button type="submit" className="btn btn-danger m-2 mb-0" onClick={onDelete}>
                         Удалить заявку
