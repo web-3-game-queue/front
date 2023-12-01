@@ -10,13 +10,17 @@ interface IAuth {
 export interface IStoreState {
     mapIds: number[],
     auth: IAuth | null,
-    currentRequestId: number | null
+    currentRequestId: number | null,
+    filterMapName: string | undefined,
+    filterMapMaxPlayersCount: number | undefined
 }
 
 const initialState: IStoreState = {
     mapIds: [],
     auth: null,
-    currentRequestId: null
+    currentRequestId: null,
+    filterMapName: undefined,
+    filterMapMaxPlayersCount: undefined
 }
 
 export const dataSlice = createSlice({
@@ -45,11 +49,17 @@ export const dataSlice = createSlice({
             state.mapIds = initialState.mapIds;
             state.auth = initialState.auth;
             state.currentRequestId = initialState.currentRequestId;
+        },
+        setFilterMapName: (state, action: PayloadAction<string | undefined>) => {
+            state.filterMapName = action.payload;
+        },
+        setFilterMapMaxPlayersCount: (state, action: PayloadAction<number | undefined>) => {
+            state.filterMapMaxPlayersCount = action.payload;
         }
     }
 });
 
-export const { setMapIds, addMapId, removeMapId, setAuth, setCurrentRequestId, reset } = dataSlice.actions;
+export const { setMapIds, addMapId, removeMapId, setAuth, setCurrentRequestId, reset, setFilterMapName, setFilterMapMaxPlayersCount } = dataSlice.actions;
 
 export const useMapIds = () =>
     useSelector((state: RootState) => state.store.mapIds);
@@ -61,5 +71,11 @@ export const useAuth = () =>
 
 export const useCurrentRequestId = () =>
     useSelector((state: RootState) => state.store.currentRequestId);
+
+export const useFilterMapName = () =>
+    useSelector((state: RootState) => state.store.filterMapName);
+
+export const useFilterMapMaxPlayersCount = () =>
+    useSelector((state: RootState) => state.store.filterMapMaxPlayersCount);
 
 export default dataSlice.reducer;
