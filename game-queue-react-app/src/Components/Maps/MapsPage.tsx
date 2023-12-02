@@ -20,17 +20,10 @@ export const MapsPageComponent: FC = () => {
         async function getMaps() {
             const maps = await MapAPI.GetMaps(filterMapName, filterMapMaxPlayersCount);
             setMaps(maps.filter((m) => m.mapStatus === MapStatus.Available));
-            if (filterNameInput !== null && filterMapName) {
-                filterNameInput.current!.value = filterMapName;
-            }
-        
-            if (maxPlayersCountInput !== null && filterMapMaxPlayersCount) {
-                maxPlayersCountInput.current!.value = filterMapMaxPlayersCount.toString();
-            }
         }
         getMaps();
 
-    }, [filterMapName, filterMapMaxPlayersCount, auth, filterNameInput, maxPlayersCountInput]);
+    }, [filterMapName, filterMapMaxPlayersCount, auth, maxPlayersCountInput]);
 
     function handleSubmit(event: React.FormEvent) {
         dispatch(setFilterMapName(filterNameInput.current?.value));
@@ -75,13 +68,13 @@ export const MapsPageComponent: FC = () => {
                         <label htmlFor="FilterMapName" className="form-label">
                             Название карты
                         </label>
-                        <input type="text" className="form-control" id="FilterMapName" name="FilterMapName" ref={filterNameInput} />
+                        <input type="text" className="form-control" id="FilterMapName" name="FilterMapName" ref={filterNameInput} defaultValue={filterMapName} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="FilterMapMaxPlayersCount" className="form-label">
                             Максимальное количество игроков
                         </label>
-                        <input type="number" className="form-control" id="FilterMapMaxPlayersCount" name="FilterMapMaxPlayersCount" min="0" ref={maxPlayersCountInput} />
+                        <input type="number" className="form-control" id="FilterMapMaxPlayersCount" name="FilterMapMaxPlayersCount" min="0" ref={maxPlayersCountInput} defaultValue={filterMapMaxPlayersCount} />
                     </div>
                     <button type="submit" className="btn btn-primary">
                         Применить
